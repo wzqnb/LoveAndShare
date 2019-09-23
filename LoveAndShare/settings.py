@@ -145,7 +145,14 @@ QINIU_SECRET_KEY = '07cFzTFDZR1IUTSHsQiuM7SJJANmMRkUs4HEYuU2'
 QINIU_BUCKET_NAME = 'wenzhaoqing'
 QINIU_DOMAIN = 'http://7xqenu.com1.z0.glb.clouddn.com/'
 
-
+# 缓存配置
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'KEY_FUNCTION': lambda key,prefix_key,version:"django:%s"%key
+    }
+}
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
