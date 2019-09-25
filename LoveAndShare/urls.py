@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
 from django.conf.urls import url
+from django.views.static import serve
+from LoveAndShare.settings import MEDIA_ROOT
 from userinfo import views
 import xadmin
 
@@ -24,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('xadmin/',xadmin.site.urls),
     path('',views.index,name='Zindex'),
+    re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('userinfo/',include('userinfo.urls',namespace='userInfo')),
 
 ]

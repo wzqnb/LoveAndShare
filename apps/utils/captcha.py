@@ -3,6 +3,7 @@
 # @Author  : wenzhaoqing
 # -*- coding: utf-8 -*-
 import random
+from random import choice
 from PIL import Image,ImageDraw,ImageFont
 import time
 import os
@@ -10,7 +11,7 @@ import string
 
 # Captcha验证码
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-class Captcha(object):
+class ImgCaptcha(object):
     # 把一些常量抽取成类属性
     #字体的位置
     font_path = os.path.join(BASE_DIR,'static','verdana.ttf')
@@ -83,3 +84,14 @@ class Captcha(object):
             cls.__gene_points(draw,10,width,height)
 
         return (text,image)
+
+
+class PhoneCaptcha(object):
+    def get_code(self):
+        seeds = "1234567890"
+        random_str = []
+        for i in range(4):
+            random_str.append(choice(seeds))
+
+        return "".join(random_str)
+

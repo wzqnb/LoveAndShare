@@ -28,7 +28,10 @@ from django.core.cache import cache
 from django.core.cache import cache
 
 
-from utils import captcha
-
-c=captcha.Captcha.gene_code()
-print(c)
+# from utils import captcha
+#
+# c=captcha.Captcha.gene_code()
+# print(c)
+from utils.captcha import PhoneCaptcha
+c=PhoneCaptcha()
+print(c.get_code())

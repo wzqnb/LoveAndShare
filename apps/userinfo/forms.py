@@ -33,7 +33,7 @@ class RegForm(forms.Form):
         },
         widget=forms.widgets.PasswordInput(
             attrs={"class": "form-control"},
-            render_value=True
+
         ),
 
     )
@@ -44,7 +44,7 @@ class RegForm(forms.Form):
         label="确认密码",
         widget=forms.widgets.PasswordInput(
             attrs={"class": "form-control"},
-            render_value=True,
+
         ),
         error_messages={
             "min_length": "确认密码至少要6位！",
@@ -54,7 +54,7 @@ class RegForm(forms.Form):
     )
 
     def phone_validate(value):
-        phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$')
+        phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$')
         if not phone_re.match(value):
             raise ValidationError('手机号码格式错误')
         is_exist=User.objects.filter(phone=value)
@@ -74,7 +74,7 @@ class RegForm(forms.Form):
             },
             widget=forms.widgets.EmailInput(
                 attrs={"class": "form-control"},
-                render_value=True
+
             ),
             validators=[phone_validate,],
 

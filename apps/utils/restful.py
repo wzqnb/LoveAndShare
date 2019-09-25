@@ -21,8 +21,8 @@ def result(code=HttpCode.ok,message="",data=None,kwargs=None):
     return JsonResponse(json_dict)
 
 
-def ok():
-    return result()
+def ok(message="",data=None):
+    return result(code=HttpCode.ok,message=message,data=data)
 
 
 def params_error(message="",data=None):
