@@ -27,6 +27,8 @@ SECRET_KEY = 'ju0t6wz(_1ea)ttlq-vwyj=@@^i&lnm$2lpepo*ft_@e-hfexx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+COMPRESS_ENABLED=True
+COMPRESS_OFFLINE = True
 
 ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'userinfo.UserInfo'
@@ -85,6 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LoveAndShare.wsgi.application'
 
+# 静态文件压缩
 STATICFILES_FINDERS = (
 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -163,9 +166,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-LOGIN_URL='/login'
-print(MEDIA_ROOT)
+LOGIN_URL='/userinfo/login'
+
+TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+DATE_TIME_FORMAT = '%Y-%m-%d'
+
 

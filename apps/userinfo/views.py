@@ -14,19 +14,35 @@ from django.contrib.auth import get_user_model
 
 User=get_user_model()
 
+def test(request):
+    c=cache.get("code")
+    print("neichun:",c)
+    return HttpResponse("test")
+
+
 def index(request):
     return HttpResponse("hello")
 
 
 def login(request):
 
-    # if request.method=="POST":
-    #     username=request.POST.get("username")
-    #     password=request.POST.get("password")
-    #     valid_code=request.POST.get("valid_code")
-    #     if valid_code and valid_code.upper()==request.session
-    # code=img_captcha(request)
-    # print(code)
+    if request.method=="POST":
+        username=request.POST.get("username")
+        print("username:",username)
+        password=request.POST.get("password")
+        valid_code=request.POST.get("valid_code")
+        print("valid_code:",valid_code)
+        if valid_code and valid_code.upper()==cache.get("code").upper():
+            print("验证码正确")
+            user=auth.authenticate(username=username,password=password)
+            if user:
+                auth.login(request,user)
+                return restful.ok(data=reverse("userinfo:index"))
+            else:
+                return restful.params_error(message="账号或密码错误")
+        else:
+            return  restful.params_error(message="验证码错误")
+
     return render(request,"login.html")
 
 
@@ -81,7 +97,8 @@ def register(request):
         form_obj=RegForm(request.POST)
         if form_obj.is_valid():
             username=request.POST.get("username")
-
+            phone=request.POST.get("phone")
+            print("this is phone:",phone)
             passwd=request.POST.get("password")
             print("passwd:",passwd)
             form_obj.cleaned_data.pop("re_password")

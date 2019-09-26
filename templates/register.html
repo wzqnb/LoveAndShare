@@ -152,7 +152,9 @@
         $.ajax({
             url: "/userinfo/check_phone_exist/",
             type: "post",
-            data: {"phone": phone},
+            data: {"phone": phone,
+                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val(),
+            },
             success: function (data) {
                 if (data.status){
                     // 用户名已被注册

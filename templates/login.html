@@ -1,10 +1,16 @@
+{% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>欢迎登录</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/mystyle.css">
+
+
+
+    <script src="{% static "/CACHE/js/jquery.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static "/CACHE/css/output.cd1b318ded0a.css" %}">
 
     <style>
         .zcenter{
@@ -58,7 +64,7 @@
         var valid_code = $("#valid_code").val();
         // 2. 用AJAX发送到服务端
         $.ajax({
-            url: "/login/",
+            url: "/userinfo/login/",
             type: "post",
             data: {
                 "username": username,
@@ -68,12 +74,12 @@
             },
             success: function (data) {
                 {#console.log(data);#}
-                if (data.status){
+                if (data.code==400){
                     // 有错误，在页面上提示
-                    $(".login-error").text(data.msg);
+                    $(".login-error").text(data.message);
                 }else {
                     // 登陆成功
-                    location.href = data.msg;
+                    location.href = data.data;
                 }
             }
         })

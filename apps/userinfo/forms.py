@@ -52,30 +52,28 @@ class RegForm(forms.Form):
         }
     )
 
-    def phone_validate(value):
-        phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$')
-        if not phone_re.match(value):
-            raise ValidationError('手机号码格式错误')
-        is_exist=User.objects.filter(phone=value)
-        if is_exist:
-            raise ValidationError("手机号码已经被注册")
+    # def phone_validate(value):
+    #     phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$')
+    #     if not phone_re.match(value):
+    #         raise ValidationError('手机号码格式错误')
+    #     is_exist=User.objects.filter(phone=value)
+    #     if is_exist:
+    #         raise ValidationError("手机号码已经被注册")
 
+    phone = forms.CharField(
 
+        max_length=11,
+        label="手机号码",
+        error_messages={
 
-    phone=forms.CharField(
-            max_length=11,
-            min_length=11,
-            label="电话号码",
-            error_messages={
-                "max_length":"电话号码必须为11位",
-                "min_length": "电话号码必须为11位",
-                "require":"电话号码不为空",
-            },
-            widget=forms.widgets.EmailInput(
-                attrs={"class": "form-control"},
+            "max_length": "密码最长11位",
 
-            ),
-            validators=[phone_validate,],
+        },
+        widget=forms.widgets.TextInput(
+
+            attrs={"class": "form-control"},
+
+        ),
 
     )
 
