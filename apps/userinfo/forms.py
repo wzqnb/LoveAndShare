@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 import re
 User=get_user_model()
 from .models import UserInfo
-
 class RegForm(forms.Form):
     username=forms.CharField(
         max_length=20,

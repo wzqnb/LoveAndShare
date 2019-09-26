@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'reversion',
     'mdeditor',
+    'compressor',
     'userinfo',
 
 
@@ -54,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -84,6 +85,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LoveAndShare.wsgi.application'
 
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'compressor.finders.CompressorFinder',)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

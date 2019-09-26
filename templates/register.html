@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <title>欢迎注册</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+
+    <style>
+
+.code{
+	width: 100px;
+    height: 25px;
+}
+</style>
+
 </head>
 <body>
 
@@ -54,7 +63,7 @@
                 <label for="password" class="col-sm-2 control-label">验证码</label>
                 <div class="col-sm-10">
                     <input type="text" name="valid_code" id="valid_code">
-                   <button id="get_code">获取验证码</button>
+                    <button id="get_code" class="code"><span>获取验证码</span></button>
                 </div>
             </div>
 
@@ -111,23 +120,20 @@
             contentType: false,  // 告诉jQuery不要设置content类型
             data: formData,
             success:function (data) {
-                console.log(data)
-                location.href = data.msg;
-                {#if (data.status){#}
-                {#    // 有错误就展示错误#}
-                {#    // console.log(data.msg);#}
-                {#    // 将报错信息填写到页面上#}
-                {#    $.each(data.msg, function (k,v) {#}
-                {#        // console.log("id_"+k, v[0]);#}
-                {#        // console.log($("#id_"+k));#}
-                {#        $("#id_"+k).next("span").text(v[0]).parent().parent().addClass("has-error");#}
-                {#    })#}
-                {##}
-                {##}
-                {#else {#}
-                {#    // 没有错误就跳转到指定页面#}
-                {#    location.href = data.msg;#}
-                {##}
+                if (data.status){
+                    // 有错误就展示错误
+                     console.log(data.msg);
+                    // 将报错信息填写到页面上
+                    $.each(data.msg, function (k,v) {
+                         console.log("id_"+k, v[0]);
+                         console.log($("#id_"+k));
+                        $("#id_"+k).next("span").text(v[0]).parent().parent().addClass("has-error");
+                    })
+
+                }else {
+                    // 没有错误就跳转到指定页面
+                    location.href = data.msg;
+                }
             }
         })
     });
@@ -139,13 +145,13 @@
 
     // 给username input框绑定一个失去焦点的事件，失去焦点之后就校验用户名是否已被注册
 
-    $("#id_phone").on("input", function () {
+    $("#id_phone").blur(function () {
         // 取到用户填写的值
         var phone = $(this).val();
         // 发请求
         $.ajax({
             url: "/userinfo/check_phone_exist/",
-            type: "get",
+            type: "post",
             data: {"phone": phone},
             success: function (data) {
                 if (data.status){

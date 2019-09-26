@@ -18,8 +18,18 @@ def index(request):
     return HttpResponse("hello")
 
 
-def login(requset):
-    pass
+def login(request):
+
+    # if request.method=="POST":
+    #     username=request.POST.get("username")
+    #     password=request.POST.get("password")
+    #     valid_code=request.POST.get("valid_code")
+    #     if valid_code and valid_code.upper()==request.session
+    # code=img_captcha(request)
+    # print(code)
+    return render(request,"login.html")
+
+
 
 def get_phonecaptcha(request):
     ret = {"status": 0, "msg": ""}
@@ -30,20 +40,23 @@ def get_phonecaptcha(request):
     ret["msg"]=code
     return JsonResponse(ret)
 
-def img_captcha(request):
-    text,image = ImgCaptcha.gene_code()
+def get_img_captcha(request):
+    text, image = ImgCaptcha.gene_code()
+    cache.set("code",text,5*60)
     # BytesIO：相当于一个管道，用来存储图片的流数据
     out = BytesIO()
     # 调用image的save方法，将这个image对象保存到BytesIO中
-    image.save(out,'png')
+    image.save(out, 'png')
     # 将BytesIO的文件指针移动到最开始的位置
     out.seek(0)
+
     response = HttpResponse(content_type='image/png')
     # 从BytesIO的管道中，读取出图片数据，保存到response对象上
     response.write(out.read())
     response['Content-length'] = out.tell()
+
     # 12Df：12Df.lower()
-    cache.set(text.lower(),text.lower(),5*60)
+    cache.set(text.lower(), text.lower(), 5 * 60)
 
     return response
 
@@ -52,7 +65,8 @@ def check_phone_exist(request):
     ret = {"status": 0, "msg": ""}
     phone = request.POST.get("phone")
     print(phone)
-    is_exist = models.UserInfo.objects.filter(phone=phone)
+    is_exist =UserInfo.objects.filter(phone=phone).first()
+    print("is_exist:",is_exist)
     if is_exist:
         ret["status"] = 1
         ret["msg"] = "手机号码已被注册！"
@@ -63,6 +77,7 @@ def register(request):
     ret = {"status": 0, "msg": ""}
     if request.method=="POST":
         print("用户注册")
+        # print(request.data)
         form_obj=RegForm(request.POST)
         if form_obj.is_valid():
             username=request.POST.get("username")
@@ -84,13 +99,18 @@ def register(request):
                     auth.login(request,user)
                     return JsonResponse(ret)
 
+        else:
+            print(form_obj.errors)
+            ret["status"] = 1
+            ret["msg"] = form_obj.errors
+            print(ret)
+            print("=" * 120)
+            return JsonResponse(ret)
+
     form_obj=RegForm(request.POST)
     return render(request,"register.html",{"form_obj":form_obj})
 
 
-
-
-
-
 def logout(request):
-    pass
+    auth.logout(request)
+    return redirect(reverse('userinfo:index'))

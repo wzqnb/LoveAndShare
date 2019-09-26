@@ -19,7 +19,7 @@ class ImgCaptcha(object):
     #生成几位数的验证码
     number = 4
     #生成验证码图片的宽度和高度
-    size = (100,40)
+    size = (100,25)
     #背景颜色，默认为白色 RGB(Re,Green,Blue)
     bgcolor = (0,0,0)
     #随机字体颜色

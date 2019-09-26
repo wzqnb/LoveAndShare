@@ -33,5 +33,7 @@ from django.core.cache import cache
 # c=captcha.Captcha.gene_code()
 # print(c)
 from utils.captcha import PhoneCaptcha
-c=PhoneCaptcha()
-print(c.get_code())
+
+
+c=reversed('userinfo；index')
+print(c)
