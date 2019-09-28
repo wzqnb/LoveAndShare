@@ -4,15 +4,16 @@ from datetime import datetime
 from mdeditor.fields import MDTextField
 from LoveAndShare import settings
 
+
 class UserInfo(AbstractUser):
     '''用户信息'''
-    phone=models.CharField(verbose_name="电话",max_length=11,unique=True)
-    avatar=models.FileField(verbose_name="头像",upload_to="avatars/",default="avatars/default.png")
-    create_time=models.DateTimeField(default=datetime.now,verbose_name='创建时间')
+    phone = models.CharField(verbose_name="电话", max_length=11, unique=True)
+    avatar = models.FileField(verbose_name="头像", upload_to="avatars/", default="avatars/default.png")
+    create_time = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
 
     class Meta:
-        verbose_name='用户信息'
-        verbose_name_plural=verbose_name
+        verbose_name = '用户信息'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.username
@@ -45,6 +46,7 @@ class Article(models.Model):
     category = models.ForeignKey('Category', verbose_name='分类', on_delete=models.CASCADE, blank=False, null=False)
     up_count = models.IntegerField(verbose_name="点赞数", default=0)
     down_count = models.IntegerField(verbose_name="踩数", default=0)
+
     def body_to_string(self):
         return self.body
 
@@ -56,6 +58,7 @@ class Article(models.Model):
         verbose_name = "文章"
         verbose_name_plural = verbose_name
         get_latest_by = 'id'
+
 
 class Category(models.Model):
     """文章分类"""
@@ -73,29 +76,29 @@ class Category(models.Model):
 
 
 class BlogSettings(models.Model):
-        '''站点设置 '''
-        sitename = models.CharField("网站名称", max_length=200, null=False, blank=False, default='')
-        site_description = models.TextField("网站描述", max_length=1000, null=False, blank=False, default='')
-        site_seo_description = models.TextField("网站SEO描述", max_length=1000, null=False, blank=False, default='')
-        site_keywords = models.TextField("网站关键字", max_length=1000, null=False, blank=False, default='')
-        article_sub_length = models.IntegerField("文章摘要长度", default=300)
-        sidebar_article_count = models.IntegerField("侧边栏文章数目", default=10)
-        sidebar_comment_count = models.IntegerField("侧边栏评论数目", default=5)
-        show_google_adsense = models.BooleanField('是否显示谷歌广告', default=False)
-        google_adsense_codes = models.TextField('广告内容', max_length=2000, null=True, blank=True, default='')
-        open_site_comment = models.BooleanField('是否打开网站评论功能', default=True)
-        beiancode = models.CharField('备案号', max_length=2000, null=True, blank=True, default='')
-        analyticscode = models.TextField("网站统计代码", max_length=1000, null=False, blank=False, default='')
-        show_gongan_code = models.BooleanField('是否显示公安备案号', default=False, null=False)
-        gongan_beiancode = models.TextField('公安备案号', max_length=2000, null=True, blank=True, default='')
-        resource_path = models.CharField("静态文件保存地址", max_length=300, null=False, default='/var/www/resource/')
+    '''站点设置 '''
+    sitename = models.CharField("网站名称", max_length=200, null=False, blank=False, default='')
+    site_description = models.TextField("网站描述", max_length=1000, null=False, blank=False, default='')
+    site_seo_description = models.TextField("网站SEO描述", max_length=1000, null=False, blank=False, default='')
+    site_keywords = models.TextField("网站关键字", max_length=1000, null=False, blank=False, default='')
+    article_sub_length = models.IntegerField("文章摘要长度", default=300)
+    sidebar_article_count = models.IntegerField("侧边栏文章数目", default=10)
+    sidebar_comment_count = models.IntegerField("侧边栏评论数目", default=5)
+    show_google_adsense = models.BooleanField('是否显示谷歌广告', default=False)
+    google_adsense_codes = models.TextField('广告内容', max_length=2000, null=True, blank=True, default='')
+    open_site_comment = models.BooleanField('是否打开网站评论功能', default=True)
+    beiancode = models.CharField('备案号', max_length=2000, null=True, blank=True, default='')
+    analyticscode = models.TextField("网站统计代码", max_length=1000, null=False, blank=False, default='')
+    show_gongan_code = models.BooleanField('是否显示公安备案号', default=False, null=False)
+    gongan_beiancode = models.TextField('公安备案号', max_length=2000, null=True, blank=True, default='')
+    resource_path = models.CharField("静态文件保存地址", max_length=300, null=False, default='/var/www/resource/')
 
-        class Meta:
-            verbose_name = '网站配置'
-            verbose_name_plural = verbose_name
+    class Meta:
+        verbose_name = '网站配置'
+        verbose_name_plural = verbose_name
 
-        def __str__(self):
-            return self.sitename
+    def __str__(self):
+        return self.sitename
 
 
 class SideBar(models.Model):
@@ -114,6 +117,3 @@ class SideBar(models.Model):
 
     def __str__(self):
         return self.name
-
-
-

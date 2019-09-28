@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6292cd13-d6c1-4f40-96c4-09869d8efce5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0002_auto_20190927_1534.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0003_auto_20190927_1541.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0004_auto_20190927_1546.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/utils/tagcloud.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LoveAndShare/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LoveAndShare/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/userinfo/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/userinfo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/userinfo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +60,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -70,7 +78,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/media/avatars" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/py3tagcloud-master" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -149,6 +157,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tagcloud" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="LoveAndShare" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/apps/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/apps/utils/tagcloud.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="LoveAndShare" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,6 +227,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tagcloud" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.ormtest" />
         <item itemvalue="Python.settings" />
@@ -225,7 +256,8 @@
       <updated>1569214984975</updated>
       <workItem from="1569214988608" duration="20734000" />
       <workItem from="1569385851905" duration="17699000" />
-      <workItem from="1569474331665" duration="19611000" />
+      <workItem from="1569474331665" duration="19671000" />
+      <workItem from="1569569351456" duration="27261000" />
     </task>
     <servers />
   </component>
@@ -257,7 +289,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LoveAndShare$test.coverage" NAME="test Coverage Results" MODIFIED="1569479193613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LoveAndShare$test.coverage" NAME="test Coverage Results" MODIFIED="1569672760497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LoveAndShare$tagcloud.coverage" NAME="tagcloud Coverage Results" MODIFIED="1569675070382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
     <SUITE FILE_PATH="coverage/LoveAndShare$ormtest.coverage" NAME="ormtest Coverage Results" MODIFIED="1569234555765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LoveAndShare$settings.coverage" NAME="settings Coverage Results" MODIFIED="1569227051871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LoveAndShare" />
   </component>

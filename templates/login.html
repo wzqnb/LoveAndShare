@@ -7,52 +7,68 @@
     <title>欢迎登录</title>
 
 
-
     <script src="{% static "/CACHE/js/jquery.js" %}"></script>
 
     <link rel="stylesheet" href="{% static "/CACHE/css/output.cd1b318ded0a.css" %}">
 
     <style>
-        .zcenter{
+        .zcenter {
             margin-top: 10%;
+        }
+
+        .get_code {
+            float: right;
+            position: relative;
+            right: 205px;
+            bottom: 50px;
+
         }
     </style>
 </head>
 <body>
 <div class="zcenter">
-<div class="container">
-    <div class="row">
-        <form class="form-horizontal col-md-6 col-md-offset-3 login-form">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">用户名</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal col-md-6 col-md-offset-3 login-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">验证码</label>
-                <div class="col-sm-10">
-                    <input type="text" name="valid_code" id="valid_code">
-                    <img id="valid-img" class="valid-img" src="{% url 'userinfo:get_img_captcha' %}" alt="">
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="valid_code" id="valid_code">
+                        <img id="valid-img" class="valid-img" alt="" src="">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="button" class="btn btn-default" id="login-button">登录</button>
-                    <span class="login-error"></span>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default" id="login-button">登录</button>
+                        <span class="login-error"></span>
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="form-group get_code">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default" id="code-button">获取验证码</button>
+                        <span class="login-error"></span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
 </div>
-</div>
+
 
 <script src="/static/jquery-3.3.1.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
@@ -74,10 +90,10 @@
             },
             success: function (data) {
                 {#console.log(data);#}
-                if (data.code==400){
+                if (data.code == 400) {
                     // 有错误，在页面上提示
                     $(".login-error").text(data.message);
-                }else {
+                } else {
                     // 登陆成功
                     location.href = data.data;
                 }
@@ -95,6 +111,19 @@
     $("#valid-img").click(function () {
         $(this)[0].src += "?";
     })
+
+    $("#code-button").click(function () {
+        var src = $('#valid-img').attr("src");
+        if (src == "/userinfo/get_img_captcha/") {
+
+            $('#valid-img').attr("src", "/userinfo/get_img_captcha/?");
+        } else {
+            $('#valid-img').attr("src", "/userinfo/get_img_captcha/");
+        }
+
+    })
+
+
 </script>
 </body>
 </html>

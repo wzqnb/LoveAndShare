@@ -14,7 +14,7 @@ class RegForm(forms.Form):
         label="用户名",
         error_messages={
             "max_length":"用户名最长20位",
-            "require":"用户名不为空"
+            "required":"用户名不为空"
         },
         widget=forms.widgets.TextInput(
             attrs={"class": "form-control"},
@@ -28,7 +28,7 @@ class RegForm(forms.Form):
         error_messages={
             "min_length":"密码最少6位",
             "max_length":"密码最长16位",
-            "require":"密码不为空",
+            "required":"密码不为空",
         },
         widget=forms.widgets.PasswordInput(
             attrs={"class": "form-control"},
@@ -52,21 +52,22 @@ class RegForm(forms.Form):
         }
     )
 
-    # def phone_validate(value):
-    #     phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$')
-    #     if not phone_re.match(value):
-    #         raise ValidationError('手机号码格式错误')
-    #     is_exist=User.objects.filter(phone=value)
-    #     if is_exist:
-    #         raise ValidationError("手机号码已经被注册")
+    def phone_validate(value):
+        phone_re = re.compile(r'^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$')
+        if not phone_re.match(value):
+            raise ValidationError('手机号码格式错误')
+        is_exist=User.objects.filter(phone=value)
+        if is_exist:
+            raise ValidationError("手机号码已经被注册")
 
     phone = forms.CharField(
-
+        min_length=11,
         max_length=11,
         label="手机号码",
         error_messages={
-
-            "max_length": "密码最长11位",
+            "min_length":"手机号码是11位",
+            "max_length": "手机号码是11位",
+            "required": "手机号码不能为空",
 
         },
         widget=forms.widgets.TextInput(
@@ -74,6 +75,7 @@ class RegForm(forms.Form):
             attrs={"class": "form-control"},
 
         ),
+        validators=[phone_validate,]
 
     )
 

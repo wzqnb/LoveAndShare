@@ -1,39 +1,33 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2019/9/23 15:07
-# @Author  : wenzhaoqing
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# font_path = os.path.join(BASE_DIR, 'static', 'verdana.ttf')
-font_path = os.path.join(os.path.dirname(__file__))
-print(font_path)
+from PIL import Image, ImageDraw, ImageFont
 
-import memcache
-mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-# mc.set("some_key", "Some value")
-# value = mc.get("some_key")
-# print(value)
-# mc.set("another_key", 3)
-# mc.delete("another_key")
-# mc.set("key", "1")   # note that the key used for incr/decr must be a string.
-# mc.incr("key",10)
-# print(mc.get("key"))
-# mc.decr("key")
-# mc.set("wen","1111")
-# print(mc.get("wen"))
-# mc.set_multi({"q":"ww","w":"ee"},time=60*2)
-# print(mc.get("w"))
+width = 500
+height = 500          # 设置分辨率
+font_size = 120          # 字体大小
+font_style  = '‪C:\Windows\Fonts\simhei.ttf'          # 字体格式
 
-from django.core.cache import cache
+bg_1 = (254, 1, 254)
+bg_2 = (0, 245, 246)
 
-from django.core.cache import cache
+# 新建一张空白图片
+randint = Image.new(mode = 'RGB', size = (width, height), color = bg_1)
+draw = ImageDraw.Draw(randint)
+# 设置步长
+step_r = (bg_2[0] - bg_1[0])  /  height
+step_g = (bg_2[1] - bg_1[1])  /  height
+step_b = (bg_2[2] - bg_1[2])  /  height
+for  y  in  range(0, height):
+    bg_r = round(bg_1[0] + step_r  *  y)
+    bg_g = round(bg_1[1] + step_g  *  y)
+    bg_b = round(bg_1[2] + step_b  *  y)
+    for  x  in  range(0, width):
+            draw.point((x, y), fill = (bg_r, bg_g, bg_b))
 
+    # 将字体绘制到图片上
+    fnt = ImageFont.truetype(font = font_style, size = font_size)
+    [fnt_width, fnt_height] = draw.textsize('Randint', font = fnt)
+    fnt_x = (width - fnt_width)  /  2
+    fnt_y = (height - fnt_height)  /  2
+    draw.text((fnt_x, fnt_y), text = 'Randint', font = fnt, fill = 'white')
 
-# from utils import captcha
-#
-# c=captcha.Captcha.gene_code()
-# print(c)
-from utils.captcha import PhoneCaptcha
-
-
-c=reversed('userinfo；index')
-print(c)
+    randint.show()
+    randint.save('randint.png')

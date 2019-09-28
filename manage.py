@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from PIL import Image,ImageDraw,ImageFont
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LoveAndShare.settings')
