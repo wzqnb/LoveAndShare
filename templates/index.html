@@ -6,8 +6,29 @@
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
 
     <style>
-        #login {
 
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .footer {
+            margin-top: -50px;
+            height: 50px;
+            background-color: #eee;
+            z-index: 9999;
+        }
+
+        .wrap {
+            min-height: 100%;
+        }
+
+        .main {
+            padding-bottom: 50px;
         }
 
         #index {
@@ -26,125 +47,300 @@
             left: 95%;
         }
 
-        #colophon {
-            position: absolute;
-            bottom: 10px;
-            right: 42%;
-        }
 
         .content {
             background-color: red;
         }
+
+        .title {
+            text-align: center;
+        }
+
+
     </style>
 </head>
 <body>
-{#导航栏#}
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+<div class="wrap">
+    <div class="main">
 
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">LoveAndShare</a>
-        </div>
+        {#导航栏#}
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LoveAndShare</a>
+                </div>
 
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active" id="index"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-                <li id="onfile"><a href="#">文章归档</a></li>
-                <li class="dropdown" id="category">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">文章分类 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">js</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">css</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">python</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">django</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active" id="index"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
+                        <li id="onfile"><a href="#">文章归档</a></li>
+                        <li class="dropdown" id="category">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">文章分类 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">js</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">css</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">python</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">django</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" id="video">视频教学</a></li>
                     </ul>
-                </li>
-                <li><a href="#" id="video">视频教学</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
 
-                <li id="login"><a href="#">登陆</a></li>
-                <li><a href="#">注册</a></li>
-
-
-            </ul>
-        </div>
-
-
-    </div>
-
-
-</nav>
-
-{#版心#}
-<div class="container">
-    <div class="row">
-
-        {#        内容#}
-        <div class="col-md-10 content">
-            <!-- 文章列表 开始 -->
-            <div class="article-list">
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-                <p>sfkjdfjsdfjkllllfol</p>
-            </div>
-            <!-- 文章列表 结束-->
-
-        </div>
-        {#        内容#}
-
-        {#        边栏#}
-        <div class="col-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">右侧广告位一</div>
-                <div class="panel-body">
-                    Panel content
+                        <li id="login"><a href="#">登陆</a></li>
+                        <li><a href="#">注册</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">右侧广告位二</div>
-                <div class="panel-body">
-                    Panel content
+
+        </nav>
+
+        {#巨幕#}
+        <div class="jumbotron">
+            <h1 class="title">LoveAndShare,分享与热爱！</h1>
+        </div>
+
+        {#版心#}
+        <div class="container">
+            <div class="row">
+
+                {#        内容#}
+                <div class="col-md-9 content">
+                    <!-- 文章列表 开始 -->
+                    <div class="article-list">
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                        <p>sfkjdfjsdfjkllllfol</p>
+                    </div>
+                    <!-- 文章列表 结束-->
                 </div>
+                {#        内容#}
+
+                {#        边栏#}
+                <div class="col-md-3">
+{#                    搜索#}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    </div>
+                    <p></p>
+                    <p></p>
+                    {#            点击#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">最多点击</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
+                        </ul>
+
+
+                    </div>
+
+                    {#            分类#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">分类目录</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
+                        </ul>
+
+
+                    </div>
+
+                    {#            标签云#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">标签云</div>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-primary">New</span></a>
+                        <a href=""><span class="label label-default">N古典风格ew</span></a>
+                        <a href=""><span class="label label-primary">N等发广告的风格ew</span></a>
+                        <a href=""><span class="label label-default">豆腐干New</span></a>
+                        <a href=""><span class="label label-default">N地方豆腐干ew</span></a>
+                        <a href=""><span class="label label-primary">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">Ne 大概的风格w</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+
+
+                    </div>
+
+{#  最近发布#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">最近发布</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <aside class="widget widget_text"><h5 class="widget-title">欢迎您star或者fork本站源代码</h5>
+        <div class="textwidget">
+
+            <p><a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star" alt="GitHub stars"></a> <a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork" alt="GitHub forks"></a></p>
+        </div>
+    </aside>
+
+
+
+                </div>
+                {#        边栏#}
             </div>
         </div>
-        {#        边栏#}
+        {#版心#}
+
+        {#底部#}
     </div>
 </div>
-{#版心#}
 
-
-{#底部#}
-<footer id="colophon" role="contentinfo">
+<footer class="footer" role="contentinfo">
     <div class="site-info" style="text-align: center">
         Copyright©&nbsp;2019&nbsp;
         <a href="/" target="blank">LoveAndShare</a>

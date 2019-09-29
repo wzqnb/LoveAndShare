@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6292cd13-d6c1-4f40-96c4-09869d8efce5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0002_auto_20190927_1534.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0003_auto_20190927_1541.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0004_auto_20190927_1546.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/utils/tagcloud.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/bbs/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0005_auto_20190929_1530.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1bd94fc-8320-49a1-9030-440907ae2295.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e1bd94fc-8320-49a1-9030-440907ae2295.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/userinfo/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/adminx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/userinfo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/userinfo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,15 +83,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps\userinfo" />
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\media\avatars" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\static" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps\utils" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\extra_apps" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps" />
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps\userinfo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -258,6 +252,7 @@
       <workItem from="1569385851905" duration="17699000" />
       <workItem from="1569474331665" duration="19671000" />
       <workItem from="1569569351456" duration="27261000" />
+      <workItem from="1569732742827" duration="13586000" />
     </task>
     <servers />
   </component>

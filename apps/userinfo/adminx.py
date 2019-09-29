@@ -17,7 +17,20 @@ class GlobalSettings(object):
 
 
 class ArticleAdmin(object):
-    list_diaplay = ['title','body']
+    list_display = ["id","title","body","author","category","pub_time","views","up_count","down_count",]
+    search_fields=["title","author","category","pub_time",]
+    list_filter=["id","title","body","author","category","pub_time","views","up_count","down_count",]
+
+class TagAdmin(object):
+    list_display=["title",]
+
+class CategroyAdmin(object):
+    list_display = ["name", ]
+
+class BlogSettingAdmin(object):
+    list_display = ["id", "title", "body", "author", "category", "pub_time", "views", "up_count", "down_count", ]
+    search_fields = ["title", "author", "category", "pub_time", ]
+
 
 
 
@@ -25,3 +38,5 @@ class ArticleAdmin(object):
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 xadmin.site.register(views.CommAdminView, GlobalSettings)
 xadmin.site.register(Article,ArticleAdmin)
+xadmin.site.register(Tag,TagAdmin)
+xadmin.site.register(Category,CategroyAdmin)

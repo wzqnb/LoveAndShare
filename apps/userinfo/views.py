@@ -59,7 +59,8 @@ def test(request):
     img_obj.save(io_obj, "png")
     # 从io对象里面取上一步保存的数据
     data = io_obj.getvalue()
-    return render(request,"test.html",{"response":data})
+    data = base64.b64encode(data).decode()
+    return render(request,"test.html",{"data":data})
 
 
 
