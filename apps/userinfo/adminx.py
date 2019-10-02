@@ -28,6 +28,8 @@ class TagAdmin(object):
 class CategroyAdmin(object):
     list_display = ["name", ]
 
+
+
 class BlogSettingAdmin(object):
     list_display = ["id", "title", "body", "author", "category", "pub_time", "views", "up_count", "down_count", ]
     search_fields = ["title", "author", "category", "pub_time", ]

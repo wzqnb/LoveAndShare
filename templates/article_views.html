@@ -1,0 +1,15 @@
+<div class="panel panel-info">
+    <div class="panel-heading">最多点击</div>
+    <ul class="list-group">
+        {% for article in article_list %}
+            <a href="{% url "article:article_detail" article.pk %}">
+                <li class="list-group-item"><span class="badge">{{ article.views }}</span>
+                    {{ article.title }}
+                </li>
+            </a>
+        {% endfor %}
+
+    </ul>
+
+
+</div>

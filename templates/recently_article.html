@@ -1,0 +1,17 @@
+ <div class="panel panel-info">
+                        <div class="panel-heading">最近发布</div>
+                        <ul class="list-group">
+                            {% for article in recently_article %}
+                            <a href="{% url "article:article_detail" article.pk %}">
+                                <li class="list-group-item">
+                                    {{ article.title }}
+                                </li>
+                            </a>
+
+
+                            {% endfor %}
+
+                        </ul>
+
+
+                    </div>

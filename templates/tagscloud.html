@@ -1,0 +1,10 @@
+<div class="panel panel-info">
+    <div class="panel-heading">标签云</div>
+
+    {% for tag in article_tags %}
+        <a href=""><span class="label label-default">{{ tag.title }}</span></a>
+
+    {% endfor %}
+    <br/>
+
+</div>

@@ -8,5 +8,17 @@ if __name__ == '__main__':
     import django
     django.setup()
     from userinfo.models import *
-    ret=UserInfo.objects.all().first()
-    print(ret.username)
+
+    # c=Category.objects.filter(name="python").first()
+    # print(c)
+    # obj=c.article_set.all()
+    # print(obj)
+
+
+    tag=Tag.objects.filter(title="python").first()
+    print(tag)
+    obj_tag=tag.article_set.all()
+    print(obj_tag)
+    # for
+
+

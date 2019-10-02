@@ -1,0 +1,55 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.footer {
+    margin-top: -50px;
+    height: 50px;
+    background-color: #eee;
+    z-index: 9999;
+}
+
+.wrap {
+    min-height: 100%;
+}
+
+.main {
+    padding-bottom: 50px;
+}
+
+#index {
+    left: 20%;
+}
+
+#onfile {
+    left: 78%;
+}
+
+#video {
+    right: 50%;
+}
+
+#category {
+    left: 95%;
+}
+
+
+.title {
+    text-align: center;
+}
+
+.navbarr {
+    display: table;
+    margin: 0 auto;
+}
+
+.navbarr li {
+    display: table-cell;
+}
+

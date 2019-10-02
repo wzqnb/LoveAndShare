@@ -1,0 +1,15 @@
+<div class="panel panel-info">
+    <div class="panel-heading">分类目录</div>
+    <ul class="list-group">
+        {% for category in article_category %}
+            <a href="">
+                <li class="list-group-item">
+                    {{ category.name }}
+
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
+
+
+</div>
