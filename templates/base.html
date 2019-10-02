@@ -1,39 +1,451 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">LoveAndShare</a>
+{% load user_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .footer {
+            margin-top: -50px;
+            height: 50px;
+            background-color: #eee;
+            z-index: 9999;
+        }
+
+        .wrap {
+            min-height: 100%;
+        }
+
+        .main {
+            padding-bottom: 50px;
+        }
+
+        #index {
+            left: 20%;
+        }
+
+        #onfile {
+            left: 78%;
+        }
+
+        #video {
+            right: 50%;
+        }
+
+        #category {
+            left: 95%;
+        }
+
+
+        .content {
+        {#background-color: red;#}
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .navbarr {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .navbarr li {
+            display: table-cell;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="main">
+
+        {#导航栏#}
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LoveAndShare</a>
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active" id="index"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
+                        <li id="onfile"><a href="#">文章归档</a></li>
+                        <li class="dropdown" id="category">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">文章分类 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">js</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">css</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">python</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">django</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" id="video">视频教学</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.username %}
+                            <li><a href="#">{{ request.user.username }}</a></li>
+                            <li><a href="{% url "userinfo:logout" %}">退出</a></li>
+                        {% else %}
+                            <li id="login"><a href="{% url "userinfo:login" %}">登陆</a></li>
+                            <li><a href="{% url "userinfo:register" %}">注册</a></li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+
+        {#巨幕#}
+        <div class="jumbotron">
+            <h1 class="title">LoveAndShare,分享与热爱！</h1>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
+        {#版心#}
+        <div class="container">
+            <div class="row">
 
-                    <li><a href="#">{{ request.user.username }}</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">个人中心<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/logout/">注销</a></li>
+                {#        内容#}
+                <div class="col-md-9 content">
+                    <!-- 文章列表 开始 -->
+                    <div class="article-list">
+                        {% for article in article_list %}
+                            <div class="article">
+                                <h3>
+                                    <a href="article/article_detail/{{ article.pk }}/">{{ article.title }}</a>
+                                </h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object author-img"
+                                                 src="/media/{{ article.author.avatar }}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{ article.desc }}</p>
+                                    </div>
+                                </div>
+                                <div class="article-footer">
+                                    <span><a href="#">{{ article.author.username }}</a></span>发布于
+                                    <span>{{ article.pub_time|date:'Y-m-d H:i:s' }}</span>&nbsp&nbsp
+                                    <span class="glyphicon glyphicon-thumbs-up">views({{ article.views }})</span>&nbsp&nbsp
+                                    <span><i class="fa fa-commenting-o fa-fw"
+                                             aria-hidden="true"></i>评论({{ article.comment_count }})</span>&nbsp&nbsp
+                                    <span><i class="fa fa-thumbs-o-up fa-fw"
+                                             aria-hidden="true"></i>点赞({{ article.up_count }})</span>
+                                </div>
+
+                                <hr>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <!-- 文章列表 结束-->
+                </div>
+                {#        内容#}
+
+                {#        边栏#}
+                <div class="col-md-3">
+                    {#                    搜索#}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    </div>
+                    <p></p>
+                    <p></p>
+                    {#            点击#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">最多点击</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item"><span class="badge">14</span>
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
                         </ul>
-                    </li>
 
+
+                    </div>
+
+                    {#            分类#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">分类目录</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
+                        </ul>
+
+
+                    </div>
+
+                    {#            标签云#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">标签云</div>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-primary">New</span></a>
+                        <a href=""><span class="label label-default">N古典风格ew</span></a>
+                        <a href=""><span class="label label-primary">N等发广告的风格ew</span></a>
+                        <a href=""><span class="label label-default">豆腐干New</span></a>
+                        <a href=""><span class="label label-default">N地方豆腐干ew</span></a>
+                        <a href=""><span class="label label-primary">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">Ne 大概的风格w</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+                        <a href=""><span class="label label-default">New</span></a>
+
+
+                    </div>
+
+                    {#  最近发布#}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">最近发布</div>
+                        <ul class="list-group">
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+                            <a href="">
+                                <li class="list-group-item">
+                                    Cras justo odio
+                                </li>
+                            </a>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <aside class="widget widget_text"><h5 class="widget-title">欢迎您star或者fork本站源代码</h5>
+                        <div class="textwidget">
+
+                            <p><a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img
+                                    src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star"
+                                    alt="GitHub stars"></a> <a href="https://github.com/liangliangyy/DjangoBlog"
+                                                               rel="nofollow"><img
+                                    src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork"
+                                    alt="GitHub forks"></a></p>
+                        </div>
+                    </aside>
+
+
+                </div>
+                {#        边栏#}
+            </div>
+        </div>
+        {#版心#}
+
+        {#    分页#}
+        <nav aria-label="Page navigation">
+            <ul class="pagination navbarr">
+
+                {{ page_info.pager|safe }}
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+        </nav>
+        {#    分页#}
+
+        {#底部#}
+    </div>
+</div>
+
+<footer class="footer" role="contentinfo">
+    <div class="site-info" style="text-align: center">
+        Copyright©&nbsp;2019&nbsp;
+        <a href="/" target="blank">LoveAndShare</a>
+        &nbsp;|&nbsp;
+
+        <a href="/sitemap.xml" title="SiteMap" target="_blank">
+            SiteMap
+        </a>
+        &nbsp;|&nbsp;
+        <a href="/feed" title="RSS Feed" target="_blank">
+            RSS Feed
+        </a>
+        &nbsp;|&nbsp;
+        <a href="/links.html" title="友情链接" rel="nofollow" target="_blank">
+            友情链接
+        </a>
+        |&nbsp; Hosting On&nbsp;
+        <a href="https://www.linode.com/?r=b0d38794d05ef8816b357a929106e89b7c6452f9" target="blank" rel="nofollow">Linode</a>
+
+        |&nbsp;
+        <a href="https://tongji.baidu.com/sc-web/3478620/home/ico?siteId=11261596" target="_blank"
+           rel="nofollow">百度统计</a>
+
+
+    </div>
+    <div class="site-info" style="text-align: center">
+        Powered by
+        <a href="https://www.djangoproject.com/" rel="nofollow" target="blank">Django</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow" target="blank">liangliangyy</a>
+        |
+        <a href="https://www.lylinux.net" target="blank">lylinux</a>
+        |
+        本页面加载耗时:0.136s
+    </div>
+
+    <div class="site-info" style="text-align: center">
+        <a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">
+            <p style=" height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                陕ICP备18005585号
+            </p>
+        </a>
+
+    </div>
+
+
+    <script type="text/javascript" async=""
+            src="https://www.google-analytics.com/gtm/js?id=GTM-K88SNJH&amp;cid=448606004.1568264787"></script>
+    <script src="https://hm.baidu.com/hm.js?32ab41acdacd6d19e154e3f004734dea"></script>
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-27354903-4', 'auto');
+        ga('require', 'GTM-K88SNJH');
+        ga('send', 'pageview');
+
+
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?32ab41acdacd6d19e154e3f004734dea";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+
+
+    </script>
+
+</footer>
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

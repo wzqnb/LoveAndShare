@@ -12,6 +12,7 @@ from .models import *
 from .forms import RegForm
 from django.contrib.auth import get_user_model
 import base64
+from utils.pager import PageInfo
 
 User = get_user_model()
 
@@ -65,7 +66,14 @@ def test(request):
 
 
 def index(request):
-    return render(request, "index.html")
+    count=Article.objects.all().count()
+    page_info = PageInfo(request.GET.get('page'), count, 8, '/userinfo/index/', 11)
+    article_list = Article.objects.all()[page_info.start():page_info.end()]
+
+
+
+
+    return render(request, "index.html",{"article_list":article_list,'page_info':page_info})
 
 
 def login(request):
@@ -77,7 +85,7 @@ def login(request):
         password = request.POST.get("password")
         valid_code = request.POST.get("valid_code")
         print("valid_code:", valid_code)
-        if valid_code and valid_code.upper() == cache.get("code").upper():
+        if valid_code and valid_code.lower() == cache.get(valid_code.lower()):
             print("验证码正确")
             user = auth.authenticate(username=username, password=password)
             if user:
@@ -161,7 +169,7 @@ def register(request):
             if code == cache.get(phone):
                 print("验证码成功")
                 if avatar_img == None:
-                    pass
+                    avatar_img="avatars/default.png"
                 UserInfo.objects.create_user(**form_obj.cleaned_data, avatar=avatar_img)
                 user = auth.authenticate(password=passwd, username=username)
                 if user:

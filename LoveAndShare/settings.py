@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'mdeditor',
     'compressor',
     'userinfo',
+    'article',
 
 
 

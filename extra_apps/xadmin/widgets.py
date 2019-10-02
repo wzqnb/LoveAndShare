@@ -72,8 +72,7 @@ class AdminSplitDateTime(forms.SplitDateTimeWidget):
         forms.MultiWidget.__init__(self, widgets, attrs)
 
     def render(self, name, value, attrs=None, renderer=None):
-        input_html = [ht for ht in super(AdminSplitDateTime, self).render(name, value, attrs, renderer).replace('><input', '>\n<input').split('\n') if
-                      ht != '']
+        input_html = [ht for ht in super(AdminSplitDateTime, self).render(name, value, attrs, renderer).replace('><input', '>\n<input').split('\n') if ht != '']
         # return input_html
         return mark_safe('<div class="datetime clearfix"><div class="input-group date bootstrap-datepicker"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>%s'
                          '<span class="input-group-btn"><button class="btn btn-default" type="button">%s</button></span></div>'
@@ -145,6 +144,7 @@ class AdminCheckboxSelect(forms.CheckboxSelectMultiple):
             option_value = force_text(option_value)
             rendered_cb = cb.render(name, option_value)
             option_label = conditional_escape(force_text(option_label))
+            final_attrs['inline'] = True if self.attrs['inline'] else False
 
             if final_attrs.get('inline', False):
                 output.append(u'<label%s class="checkbox-inline">%s %s</label>' % (label_for, rendered_cb, option_label))

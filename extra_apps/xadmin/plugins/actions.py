@@ -100,14 +100,13 @@ class DeleteSelectedAction(BaseActionView):
         # Populate deletable_objects, a data structure of all related objects that
         # will also be deleted.
 
-        if django_version > (2, 1):
+        if django_version > (2, 0):
             deletable_objects, model_count, perms_needed, protected = get_deleted_objects(
-                queryset, self.opts, self.admin_site)
+                queryset, self, self.admin_site)
         else:
             using = router.db_for_write(self.model)
             deletable_objects, model_count, perms_needed, protected = get_deleted_objects(
                 queryset, self.opts, self.user, self.admin_site, using)
-
 
         # The user has already confirmed the deletion.
         # Do the deletion and return a None to display the change list view again.

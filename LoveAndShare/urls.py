@@ -28,5 +28,6 @@ urlpatterns = [
     path('',views.index,name='Zindex'),
     re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('userinfo/',include('userinfo.urls',namespace='userinfo')),
+    path('article/',include('article.urls',namespace='article')),
 
 ]

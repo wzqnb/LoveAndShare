@@ -1,3 +1,4 @@
+{% load user_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,11 +50,20 @@
 
 
         .content {
-            background-color: red;
+        {#background-color: red;#}
         }
 
         .title {
             text-align: center;
+        }
+
+        .navbarr {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .navbarr li {
+            display: table-cell;
         }
 
 
@@ -103,9 +113,14 @@
                         <li><a href="#" id="video">视频教学</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.username %}
+                            <li><a href="#">{{ request.user.username }}</a></li>
+                            <li><a href="{% url "userinfo:logout" %}">退出</a></li>
+                        {% else %}
+                            <li id="login"><a href="{% url "userinfo:login" %}">登陆</a></li>
+                            <li><a href="{% url "userinfo:register" %}">注册</a></li>
 
-                        <li id="login"><a href="#">登陆</a></li>
-                        <li><a href="#">注册</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -125,40 +140,36 @@
                 <div class="col-md-9 content">
                     <!-- 文章列表 开始 -->
                     <div class="article-list">
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
+                        {% for article in article_list %}
+                            <div class="article">
+                                <h3>
+                                    <a href="article/article_detail/{{ article.pk }}/">{{ article.title }}</a>
+                                </h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object author-img"
+                                                 src="/media/{{ article.author.avatar }}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{ article.desc }}</p>
+                                    </div>
+                                </div>
+                                <div class="article-footer">
+                                    <span><a href="#">{{ article.author.username }}</a></span>发布于
+                                    <span>{{ article.pub_time|date:'Y-m-d H:i:s' }}</span>&nbsp&nbsp
+                                    <span class="glyphicon glyphicon-thumbs-up">views({{ article.views }})</span>&nbsp&nbsp
+                                    <span><i class="fa fa-commenting-o fa-fw"
+                                             aria-hidden="true"></i>评论({{ article.comment_count }})</span>&nbsp&nbsp
+                                    <span><i class="fa fa-thumbs-o-up fa-fw"
+                                             aria-hidden="true"></i>点赞({{ article.up_count }})</span>
+                                </div>
 
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjklllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjkllllfkjdfjsdfjklllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
-                        <p>sfkjdfjsdfjkllllfol</p>
+                                <hr>
+                            </div>
+                        {% endfor %}
+
                     </div>
                     <!-- 文章列表 结束-->
                 </div>
@@ -166,7 +177,7 @@
 
                 {#        边栏#}
                 <div class="col-md-3">
-{#                    搜索#}
+                    {#                    搜索#}
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="input-group">
@@ -281,7 +292,7 @@
 
                     </div>
 
-{#  最近发布#}
+                    {#  最近发布#}
                     <div class="panel panel-info">
                         <div class="panel-heading">最近发布</div>
                         <ul class="list-group">
@@ -322,12 +333,16 @@
 
 
                     <aside class="widget widget_text"><h5 class="widget-title">欢迎您star或者fork本站源代码</h5>
-        <div class="textwidget">
+                        <div class="textwidget">
 
-            <p><a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star" alt="GitHub stars"></a> <a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork" alt="GitHub forks"></a></p>
-        </div>
-    </aside>
-
+                            <p><a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img
+                                    src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star"
+                                    alt="GitHub stars"></a> <a href="https://github.com/liangliangyy/DjangoBlog"
+                                                               rel="nofollow"><img
+                                    src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork"
+                                    alt="GitHub forks"></a></p>
+                        </div>
+                    </aside>
 
 
                 </div>
@@ -335,6 +350,15 @@
             </div>
         </div>
         {#版心#}
+
+        {#    分页#}
+        <nav aria-label="Page navigation">
+            <ul class="pagination navbarr">
+
+                {{ page_info.pager|safe }}
+            </ul>
+        </nav>
+        {#    分页#}
 
         {#底部#}
     </div>

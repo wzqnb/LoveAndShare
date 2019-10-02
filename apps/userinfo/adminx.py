@@ -17,9 +17,10 @@ class GlobalSettings(object):
 
 
 class ArticleAdmin(object):
-    list_display = ["id","title","body","author","category","pub_time","views","up_count","down_count",]
+    list_display = ["id","title","desc","author","category","pub_time","views","up_count","down_count",]
     search_fields=["title","author","category","pub_time",]
     list_filter=["id","title","body","author","category","pub_time","views","up_count","down_count",]
+    list_editable=["id","title","desc","category","views","up_count","down_count",]
 
 class TagAdmin(object):
     list_display=["title",]

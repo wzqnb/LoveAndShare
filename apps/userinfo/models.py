@@ -34,6 +34,7 @@ class Article(models.Model):
         ('p', '页面'),
     )
     title = models.CharField('标题', max_length=200, unique=True)
+    desc=models.TextField("文章描述",blank=True,null=True,max_length=200)
     body = MDTextField('正文')
     pub_time = models.DateTimeField('发布时间', blank=False, null=False, default=datetime.now)
     status = models.CharField('文章状态', max_length=1, choices=STATUS_CHOICES, default='p')
