@@ -1,7 +1,109 @@
 {% extends "base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/article_updown.css" %}">
+{% endblock %}
+
 
 {% block content %}
 
-    {{ article.body }}
+    <div>
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.body|safe }}</p>
+    </div>
+
+    <div class="poll clearfix">
+        <div id="div_digg">
+
+            <div class="diggit action">
+                <span class="diggnum" id="digg_count">{{ article.up_count }}</span>
+            </div>
+
+            <div class="buryit action">
+                <span class="burynum" id="bury_count">{{ article.down_count }}</span>
+            </div>
+            <div class="clear"></div>
+            <div class="diggword" id="digg_tips" style="color: red;"></div>
+        </div>
+    </div>
+
+    <div class="info" article_id="{{ article.pk }}" username="{{ request.user.username }}"></div>
+    {% csrf_token %}
+
+
+    {% if request.user.username %}
+        <div class="div_comment">
+            <p>昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50"
+                         value="{{ request.user.username }}"></p>
+            <p>评论内容</p>
+            <textarea name="" id="comment_content" cols="60" rows="10"></textarea>
+            <p>
+                <button id="comment_btn">提交评论</button>
+            </p>
+
+        </div>
+    {% else %}
+        <a href="{% url "userinfo:login" %}">登录</a>
+    {% endif %}
+
+
+
+
+
+
+    <script>
+
+        $("#div_digg .action").click(function () {
+
+            if ($(".info").attr("username")) {
+                // 点赞或踩灭
+
+                var is_up = $(this).hasClass("diggit");
+                var article_id = $(".info").attr("article_id");
+                console.log("点赞或不喜欢")
+                console.log(is_up)
+                $.ajax({
+                    url: "/article/article_updown/",
+                    type: "post",
+                    data: {
+                        "is_up": is_up,
+                        "article_id": article_id,
+                        "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.state) {// 赞或者灭成功
+
+                            if (is_up) {
+                                var val = $("#digg_count").text();
+                                val = parseInt(val) + 1;
+                                $("#digg_count").text(val);
+                            } else {
+                                var val = $("#bury_count").text();
+                                val = parseInt(val) + 1;
+                                $("#bury_count").text(val);
+                            }
+                        } else {    // 重复提交
+
+                            if (data.fisrt_action) {
+                                $("#digg_tips").html("您已经推荐过");
+                            } else {
+                                $("#digg_tips").html("您已经反对过");
+                            }
+
+                            setTimeout(function () {
+                                $("#digg_tips").html("")
+                            }, 1000)
+                        }
+                    }
+                })
+            } else {
+                alert("请先登陆！")
+            }
+        });
+
+
+    </script>
+
 {% endblock %}
+

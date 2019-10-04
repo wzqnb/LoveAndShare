@@ -1,73 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-{#    <link rel="stylesheet" href="/static/mystyle.css">#}
+{% extends "base.html" %}
 
-<style>
-        span.highlighted {
-            color: red;
-        }
-    </style>
-</head>
-<body>
- {% load highlight %}
-    <p>hello</p>
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">左侧广告位一</div>
-                <div class="panel-body">
+{% block content %}
 
 
-                </div>
+    <button id="test">
+
+
+     <div class="diggit action">
+                <span class="diggnum" id="digg_count">0</span>
             </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">左侧广告位二</div>
-                <div class="panel-body">
-                    Panel content
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <!-- 文章列表 开始 -->
-            <div>
 
-            {{ query }}
 
-              {%  for result in page %}
-{#                  <p>{{ result }}</p>#}
-                  <p>{{ result.object.title }}</p>
 
-                  <p>{{ result.object.desc }}</p>
-                  <p>//////////////////////</p>
-                  {% highlight result.object.title with query %}
-                  {% highlight result.object.desc with query %}
-                  <p>//////////////////////////////</p>
 
-                {% endfor %}
-            </div>
-            <!-- 文章列表 结束-->
 
-        </div>
-        <div class="col-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">右侧广告位一</div>
-                <div class="panel-body">
-                    Panel content
-                </div>
-            </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">右侧广告位5757</div>
-                <div class="panel-body">
-                    Panel content
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+    </button>
+
+
+    <script>
+
+
+    $(".action").click(function () {
+            console.log("fsd");
+
+        });
+
+    </script>
+
+
+{% endblock %}

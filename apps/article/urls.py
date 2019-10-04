@@ -10,6 +10,7 @@ urlpatterns = [
     path('article_category/<str:category>/',views.article_category,name='article_category'),
     path('article_tag/<str:tag>/',views.article_tag,name='article_tag'),
     path('article_archive/',views.article_archive,name='article_archive'),
+    path('article_updown/',views.article_updown,name='article_updown'),
 
 
 ]

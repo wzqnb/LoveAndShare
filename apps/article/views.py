@@ -1,8 +1,10 @@
+from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
-from userinfo.models import Article,Category,Tag
+from userinfo.models import Article,Category,Tag,ArticleUpDown
 from django.db.models import F
 from utils.pager import PageInfo
 from django.core.cache import cache
+import json
 
 
 # Create your views here.
@@ -41,3 +43,30 @@ def article_archive(request):
 
 
     return render(request,"article_archive.html",{"article_list":article_list})
+
+def article_updown(request):
+    '''文章点赞或不喜欢'''
+    article_id = request.POST.get("article_id")
+    print("article_id",article_id)
+
+    is_up = json.loads(request.POST.get('is_up'))
+    print("is_up",is_up)
+    user = request.user
+    response = {"state": True}
+    try:
+        ArticleUpDown.objects.create(user=user, article_id=article_id, is_up=is_up)
+        if is_up:
+            print("dianzan",is_up)
+            Article.objects.filter(pk=article_id).update(up_count=F("up_count") + 1)
+        # user与articlie_id已经做了联合唯一索引 第一次点赞或踩都进行操作
+        else:
+            print("vuxihaun", is_up)
+            Article.objects.filter(pk=article_id).update(down_count=F("down_count") + 1)
+        # 但第二次不论点还是踩 都会报错因为已经联合唯一了
+
+    except Exception as e:
+        response["state"] = False
+        response["fisrt_action"] = ArticleUpDown.objects.filter(user=user, article_id=article_id).first().is_up
+        # 把点赞还是踩的状态拿出来
+    return JsonResponse(response)
+
