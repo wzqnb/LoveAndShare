@@ -1,71 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+{#    <link rel="stylesheet" href="/static/mystyle.css">#}
 
-    <title></title>
-    <meta charset="utf-8" />
-    <style type="text/css">
-        * {
-            margin: 0px;
-            padding: 0px;
+<style>
+        span.highlighted {
+            color: red;
         }
-
-        html, body {
-            height: 100%;
-        }
-
-        .footer {
-            margin-top: -50px;
-            height: 50px;
-            background-color: #eee;
-            z-index: 9999;
-        }
-
-        .wrap {
-            min-height: 100%;
-        }
-
-        .main {
-            padding-bottom: 50px;
-        }
-
-        .navbar {
-    display:table;
-    margin:0 auto;
-}
-.navbar li {
-    display:table-cell;
-}
-.navbar li + li {
-    {#padding-left:20px;#}
-}
     </style>
 </head>
 <body>
-<div class="page">
-<nav>
-  <ul class="pagination navbar">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+ {% load highlight %}
+    <p>hello</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">左侧广告位一</div>
+                <div class="panel-body">
 
+
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">左侧广告位二</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!-- 文章列表 开始 -->
+            <div>
+
+            {{ query }}
+
+              {%  for result in page %}
+{#                  <p>{{ result }}</p>#}
+                  <p>{{ result.object.title }}</p>
+
+                  <p>{{ result.object.desc }}</p>
+                  <p>//////////////////////</p>
+                  {% highlight result.object.title with query %}
+                  {% highlight result.object.desc with query %}
+                  <p>//////////////////////////////</p>
+
+                {% endfor %}
+            </div>
+            <!-- 文章列表 结束-->
+
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">右侧广告位一</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">右侧广告位5757</div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
     </div>
-
+</div>
 </body>
 </html>

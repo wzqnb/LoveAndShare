@@ -23,11 +23,14 @@ html, body {
     padding-bottom: 50px;
 }
 
+
+
+/*导航条*/
 #index {
     left: 20%;
 }
 
-#onfile {
+#archive {
     left: 78%;
 }
 
@@ -39,11 +42,13 @@ html, body {
     left: 95%;
 }
 
-
+/*巨幕*/
 .title {
     text-align: center;
 }
 
+
+/*底边栏固定*/
 .navbarr {
     display: table;
     margin: 0 auto;
@@ -52,4 +57,18 @@ html, body {
 .navbarr li {
     display: table-cell;
 }
+
+
+/*搜索框样式*/
+.search{
+            position: absolute;
+
+            left: 200px;
+        }
+
+
+/*搜索颜色设置*/
+span.highlighted {
+        color: red;
+    }
 

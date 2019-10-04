@@ -2,7 +2,7 @@
     <div class="panel-heading">标签云</div>
 
     {% for tag in article_tags %}
-        <a href=""><span class="label label-default">{{ tag.title }}</span></a>
+        <a href="{% url "article:article_tag" tag.title %}"><span class="label label-default">{{ tag.title }}</span></a>
 
     {% endfor %}
     <br/>

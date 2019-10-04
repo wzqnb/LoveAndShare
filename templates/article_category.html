@@ -2,7 +2,7 @@
     <div class="panel-heading">分类目录</div>
     <ul class="list-group">
         {% for category in article_category %}
-            <a href="">
+            <a href="{% url "article:article_category" category.name %}">
                 <li class="list-group-item">
                     {{ category.name }}
 

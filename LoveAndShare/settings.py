@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'reversion',
     'mdeditor',
     'compressor',
+    'haystack',
     'userinfo',
     'article',
 
@@ -163,6 +164,18 @@ CACHES = {
         'KEY_FUNCTION': lambda key,prefix_key,version:"django:%s"%key
     }
 }
+
+# 搜索配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'apps.article.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

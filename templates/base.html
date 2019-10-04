@@ -30,23 +30,22 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active" id="index"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-                        <li id="onfile"><a href="#">文章归档</a></li>
+                        <li class="active" id="index"><a href="{% url "userinfo:index" %}">主页 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li id="archive"><a href="{% url "article:article_archive" %}">文章归档</a></li>
                         <li class="dropdown" id="category">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
                                aria-expanded="false">文章分类 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">js</a></li>
+                                <li><a href="{% url "article:article_category" "c语言" %}">c语言</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">css</a></li>
+                                <li><a href="{% url "article:article_category" "mysql" %}">mysql</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">python</a></li>
+                                <li><a href=href="{% url "article:article_category" "python" %}">python</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">django</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="https://www.runoob.com/">One more separated link</a></li>
                             </ul>
                         </li>
                         <li><a href="#" id="video">视频教学</a></li>
@@ -58,7 +57,6 @@
                         {% else %}
                             <li id="login"><a href="{% url "userinfo:login" %}">登陆</a></li>
                             <li><a href="{% url "userinfo:register" %}">注册</a></li>
-
                         {% endif %}
                     </ul>
                 </div>
@@ -79,7 +77,6 @@
                     {% block content %}
                     {% endblock %}
                     <!-- 文章列表 结束-->
-
                 </div>
                 {#        内容#}
                 {#        边栏#}
@@ -88,40 +85,41 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-      </span>
+                                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                                    <input type="search" name="q" placeholder="Search for..." required class="form-control" >
+                                    <button type="submit" class="btn btn-default search" ><span class="ion-ios-search-strong">search</span></button>
+                                </form>
+
+{#<span class="ion-ios-search-strong">搜素</span>#}
+
+
                             </div><!-- /input-group -->
                         </div>
                     </div>
                     <p></p>
                     <p></p>
-
                     {#            点击#}
-
                     {% get_article_view %}
                     {#            分类#}
-
                     {% get_article_category %}
-
                     {#            标签云#}
                     {% get_article_tags %}
-
                     {#  最近发布#}
                     {% get_recently_article %}
-
                     <aside class="widget widget_text"><h5 class="widget-title">欢迎您star或者fork本站源代码</h5>
                         <div class="textwidget">
-                            <p><a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow"><img
-                                    src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star"
-                                    alt="GitHub stars"></a> <a href="https://github.com/liangliangyy/DjangoBlog"
-                                                               rel="nofollow"><img
-                                    src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork"
-                                    alt="GitHub forks"></a></p>
+                            <p><a href="https://github.com/wzqnb/LoveAndShare" rel="nofollow">
+                                <iframe src="https://ghbtns.com/github-btn.html?user=wzqnb&repo=LoveAndShare&type=star&count=true"
+                                        frameborder="0" scrolling="0" width="102px" height="21px"></iframe>
+
+                            </a>
+                                <a href="https://github.com/wzqnb/LoveAndShare"
+                                   rel="nofollow">
+                                    <iframe src="https://ghbtns.com/github-btn.html?user=wzqnb&repo=LoveAndShare&type=fork&count=true"
+                                            frameborder="0" scrolling="0" width="110px" height="21px"></iframe>
+                                </a></p>
                         </div>
                     </aside>
-
                 </div>
                 {#        边栏#}
             </div>
@@ -136,7 +134,6 @@
         {#底部#}
     </div>
 </div>
-
 <footer class="footer" role="contentinfo">
     <div class="site-info" style="text-align: center">
         Copyright©&nbsp;2019&nbsp;

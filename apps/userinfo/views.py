@@ -69,10 +69,6 @@ def index(request):
     count=Article.objects.all().count()
     page_info = PageInfo(request.GET.get('page'), count, 8, 'userinfo/index/', 11)
     article_list = Article.objects.all()[page_info.start():page_info.end()]
-
-
-
-
     return render(request, "index.html",{"article_list":article_list,'page_info':page_info})
 
 
