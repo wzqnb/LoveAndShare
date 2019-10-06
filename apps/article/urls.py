@@ -11,6 +11,9 @@ urlpatterns = [
     path('article_tag/<str:tag>/',views.article_tag,name='article_tag'),
     path('article_archive/',views.article_archive,name='article_archive'),
     path('article_updown/',views.article_updown,name='article_updown'),
+    path('comment/',views.comment,name='comment'),
+    path('article_add/',views.article_add,name='article_add'),
+    path('article_image_upload/',views.article_image_upload,name='article_image_upload'),
 
 
 ]

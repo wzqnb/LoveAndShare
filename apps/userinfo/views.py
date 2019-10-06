@@ -18,50 +18,11 @@ User = get_user_model()
 
 
 def test(request):
-    import os
-    import string
+    print(request.user.pk)
+    print("fffffffffffffffffffffffffffffff")
+    h="&lt;h1&gt;ggggggggggggg&lt;/h1&gt;"
 
-    # Captcha验证码
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    font_path = os.path.join(BASE_DIR, 'static', 'verdana.ttf')
-
-    from PIL import Image, ImageDraw, ImageFont
-    import random
-
-    def get_random_color():
-        return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
-
-    # 生成一个图片对象
-    img_obj = Image.new(
-        'RGB',
-        (220, 35),
-        get_random_color()
-    )
-    # 在生成的图片上写字符
-    # 生成一个图片画笔对象
-    draw_obj = ImageDraw.Draw(img_obj)
-    # 加载字体文件， 得到一个字体对象
-    font_obj = ImageFont.truetype("../../static/verdana.ttf", 28)
-    # 开始生成随机字符串并且写到图片上
-    tmp_list = []
-
-    def tmp():
-        return "j"
-    for i in range(4):
-
-
-        draw_obj.text((20 + 40 * i, 0), tmp(), fill=get_random_color(), font=font_obj)
-
-    print("".join(tmp_list))
-    print("生成的验证码".center(120, "="))
-    from io import BytesIO
-    io_obj = BytesIO()
-    # 将生成的图片数据保存在io对象中
-    img_obj.save(io_obj, "png")
-    # 从io对象里面取上一步保存的数据
-    data = io_obj.getvalue()
-    data = base64.b64encode(data).decode()
-    return render(request,"test.html",{"data":data})
+    return render(request,"test.html",{"h":h})
 
 
 

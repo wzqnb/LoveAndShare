@@ -33,7 +33,7 @@ class Article(models.Model):
         ('a', '文章'),
         ('p', '页面'),
     )
-    title = models.CharField('标题', max_length=200, unique=True)
+    title = models.CharField('标题', max_length=200)
     desc=models.TextField("文章描述",blank=True,null=True,max_length=200)
     body = MDTextField('正文')
     pub_time = models.DateTimeField('发布时间', blank=False, null=False, default=datetime.now)

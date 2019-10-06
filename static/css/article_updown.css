@@ -33,3 +33,13 @@
 .clear {
     clear: both;
 }
+
+
+input.author{
+    background-image: url("/media/img/icon_form.gif");
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    padding: 4px 4px 4px 30px;
+    width: 300px;
+    font-size: 13px;
+}

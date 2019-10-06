@@ -27,6 +27,37 @@
         </div>
     </div>
 
+
+
+    <p>评论列表</p>
+    <ul class="comment_list">
+        {% for comment in comment_list %}
+            <li class="list-group-item">
+                <div>
+                    <a href="">#{{ forloop.counter }}楼</a> &nbsp;&nbsp;
+                    <span style="color: gray">{{ comment.create_time|date:"Y-m-d H:i" }}</span> &nbsp;&nbsp;
+                    <a href=""><span>{{ comment.user.username }}</span></a>
+                    <a class="pull-right reply_btn" username="{{ comment.user.username }}"
+                       comment_pk="{{ comment.pk }}"><span>回复</span></a>
+                </div>
+                {% if comment.parent_comment_id %}
+                    <div class="pid_info well">
+                        <p> {{ comment.parent_comment.user.username }}:
+                            &nbsp;&nbsp;&nbsp;{{ comment.parent_comment.content }} </p>
+                    </div>
+                {% endif %}
+
+                <div class="con">
+                    <p>
+                        {{ comment.content|safe}}
+                    </p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
     <div class="info" article_id="{{ article.pk }}" username="{{ request.user.username }}"></div>
     {% csrf_token %}
 
@@ -35,7 +66,7 @@
             <p>昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50"
                          value="{{ request.user.username }}"></p>
             <p>评论内容</p>
-            <textarea name="" id="comment_content" cols="60" rows="10"></textarea>
+            <textarea name="" id="comment_content" cols="60" rows="15"></textarea>
             <p>
                 <button id="comment_btn">提交评论</button>
             </p>
@@ -47,14 +78,14 @@
 
 
 
-
-
-
     <script>
+
+        {#点赞#}
         $("#div_digg .action").click(function () {
 
             if ($(".info").attr("username")) {
                 // 点赞或踩灭
+
                 var is_up = $(this).hasClass("diggit");
                 var article_id = $(".info").attr("article_id");
                 $.ajax({
@@ -96,6 +127,58 @@
                 alert("请先登陆！")
             }
         });
+
+        {#评论#}
+        var pid="";
+        $("#comment_btn").click(function () {
+            var article_id = $(".info").attr("article_id");
+            var content = $("#comment_content").val();
+            if (pid) {
+                var index = content.indexOf("\n");
+                content = content.slice(index + 1);
+            }
+            $.ajax({
+                url: "/article/comment/",
+                type:"post",
+                data:{
+                    article_id: article_id,
+                    content: content,
+                    pid: pid,
+                    csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+                },
+                  success: function (data) {
+                    var create_time = data.create_time;
+                    var content = data.content;
+                    var username = data.username;
+
+
+                    var comment_li = '<li class="list-group-item"><div><span style="color: gray">' + create_time + '</span> &nbsp;&nbsp; <a href=""><span>' + username + '</span></a></div> <div class="con"> <p> ' + content + ' </p> </div> </li>';
+
+                    $(".comment_list").append(comment_li);
+
+                    // 清空文本框
+                    $("#comment_content").val('');
+                    // 清空pid
+                    pid = ""
+                }
+
+
+
+            })
+        })
+
+        {#回复#}
+        $(".list-group-item .reply_btn").click(function () {
+            $("#comment_content").focus();
+            var v="@"+$(this).attr("username")+"\n";
+            $("#comment_content").val(v);
+            pid=$(this).attr("comment_pk");
+
+
+        })
+
+
+
 
     </script>
 

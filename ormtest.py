@@ -15,10 +15,14 @@ if __name__ == '__main__':
     # print(obj)
 
 
-    tag=Tag.objects.filter(title="python").first()
-    print(tag)
-    obj_tag=tag.article_set.all()
-    print(obj_tag)
+    # tag=Tag.objects.filter(title="python").first()
+    # print(tag)
+    # obj_tag=tag.article_set.all()
+    # print(obj_tag)
     # for
-
+    # art=
+    tags=["c","c++","python"]
+    for title in tags:
+        tag_pk = Tag.objects.filter(title=title).first().pk
+        print(tag_pk)
 
