@@ -1,0 +1,7 @@
+{% for cate in blog_category %}
+
+    <li role="separator" class="divider"></li>
+    <li><a href="{% url  "article:article_category"  cate.name %}">{{ cate.name }}</a></li>
+
+
+{% endfor %}

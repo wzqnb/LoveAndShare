@@ -119,7 +119,7 @@ class Comment(models.Model):
     """
     article = models.ForeignKey("Article",on_delete=models.CASCADE)
     user = models.ForeignKey("UserInfo",on_delete=models.CASCADE)
-    content = models.CharField(max_length=255)  # 评论内容
+    content = models.TextField(max_length=1000)  # 评论内容
     create_time = models.DateTimeField(auto_now_add=True)
     parent_comment = models.ForeignKey("self", null=True, blank=True,on_delete=models.CASCADE)  # blank=True 在django admin里面可以不填
     def __str__(self):

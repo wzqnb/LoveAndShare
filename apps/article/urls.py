@@ -14,6 +14,10 @@ urlpatterns = [
     path('comment/',views.comment,name='comment'),
     path('article_add/',views.article_add,name='article_add'),
     path('article_image_upload/',views.article_image_upload,name='article_image_upload'),
+    path('article_list_forme/<int:pk>/',views.article_list_forme,name='article_list_forme'),
+    path('article_detele/',views.article_detele,name='article_detele'),
+    path('article_editor/<int:id>/',views.article_editor,name='article_editor'),
+    path('article_editor_save/',views.article_editor_save,name='article_editor_save'),
 
 
 ]

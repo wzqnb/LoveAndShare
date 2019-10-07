@@ -45,14 +45,7 @@
                                aria-haspopup="true"
                                aria-expanded="false">文章分类 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url "article:article_category" "c语言" %}">c语言</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url "article:article_category" "mysql" %}">mysql</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href=href="{% url "article:article_category" "python" %}">python</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="https://www.runoob.com/">One more separated link</a></li>
+                               {% blogcategory %}
                             </ul>
                         </li>
                         <li><a href="#" id="video">视频教学</a></li>
@@ -64,7 +57,7 @@
                                aria-haspopup="true"
                                aria-expanded="false">{{ request.user.username }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{% url "article:article_category" "c语言" %}">我的文章列表</a></li>
+                                <li><a href="{% url "article:article_list_forme" request.user.pk %}">我的文章列表</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{% url "article:article_add" %}">添加文章</a></li>
                                 <li role="separator" class="divider"></li>

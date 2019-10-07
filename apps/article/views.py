@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect,reverse
 from userinfo.models import *
 from django.db.models import F
 from utils.pager import PageInfo
@@ -8,6 +8,7 @@ import os
 from bs4 import BeautifulSoup
 import html
 import bleach
+
 
 from django.core.cache import cache
 import json
@@ -19,38 +20,34 @@ def article_detail(request, id):
     '''文章详情'''
     article = Article.objects.filter(id=id).first()
     Article.objects.filter(id=id).update(views=F("views") + 1)
-    comment_list=Comment.objects.filter(article_id=id)
-    # print("comment_list",comment_list)
-    # print("articel",article)
+    comment_list = Comment.objects.filter(article_id=id)
     if article:
-        return render(request, "article_detail.html", {"article": article,"comment_list":comment_list})
+        return render(request, "article_detail.html", {"article": article, "comment_list": comment_list})
     else:
         return HttpResponse("404")
 
-def article_category(request,category):
+
+def article_category(request, category):
     '''文章分类'''
-    category_obj=Category.objects.filter(name=category).first()
-    count=category_obj.article_set.all().count()
-    page_info = PageInfo(request.GET.get('page'), count, 2, '/article/article_category/category', 11)
-    category_article = category_obj.article_set.all()[page_info.start():page_info.end()]
+    category_obj = Category.objects.filter(name=category).first()
+    category_article = category_obj.article_set.all()
 
-    return render(request, "article_list.html", {"article_list": category_article,"page_info":page_info})
+    return render(request, "article_list.html", {"article_list": category_article})
 
 
-def article_tag(request,tag):
+def article_tag(request, tag):
     '''文章标签'''
     tag = Tag.objects.filter(title=tag).first()
-    # print(tag)
-    tag_article= tag.article_set.all()
-    return render(request,"article_list.html",{"article_list":tag_article})
+    tag_article = tag.article_set.all()
+    return render(request, "article_list.html", {"article_list": tag_article})
 
 
 def article_archive(request):
     '''文章归档'''
-    article_list=Article.objects.all().order_by("-pub_time")
+    article_list = Article.objects.all().order_by("-pub_time")
 
+    return render(request, "article_archive.html", {"article_list": article_list})
 
-    return render(request,"article_archive.html",{"article_list":article_list})
 
 def article_updown(request):
     '''文章点赞或不喜欢'''
@@ -73,72 +70,69 @@ def article_updown(request):
         # 把点赞还是踩的状态拿出来
     return JsonResponse(response)
 
+
 def comment(request):
     import html
     '''文章评论'''
     # pid判断是子评论还是父评论
-    print("post",request.POST)
-    pid=request.POST.get("pid")
-    print("pid",pid)
-    article_id=request.POST.get("article_id")
-    content=request.POST.get("content")
-    content=html.escape(content,quote=True)
-    user_pk=request.user.pk
-    print("user_pk",user_pk)
-    response={}
+    pid = request.POST.get("pid")
+    article_id = request.POST.get("article_id")
+    content = request.POST.get("content")
+    content = html.escape(content, quote=True)
+    user_pk = request.user.pk
+    response = {}
     if not pid:
         # 父评论
-        comment_obj=Comment.objects.create(article_id=article_id,user_id=user_pk,content=content)
+        comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content)
     else:
         # 子评论
-        comment_obj=Comment.objects.create(article_id=article_id,user_id=user_pk,content=content,parent_comment_id=pid)
+        comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content,
+                                             parent_comment_id=pid)
 
-    response["create_time"]=comment_obj.create_time.strftime("%Y-%m-%d")
+    response["create_time"] = comment_obj.create_time.strftime("%Y-%m-%d")
     response["content"] = comment_obj.content
     response["username"] = comment_obj.user.username
     return JsonResponse(response)
 
-from bleach.sanitizer import ALLOWED_ATTRIBUTES,ALLOWED_TAGS
+
+from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
+
 
 def article_add(request):
-    if request.method=="POST":
-        c=request.POST
-        c=dict(c)
-        tag=c['tag']
-        title=request.POST.get("title")
-        category=request.POST.get("category")
+    '''文章添加'''
+    if request.method == "POST":
+        c = request.POST
+        c = dict(c)
+        tag = c['tag']
+        title = request.POST.get("title")
+        category = request.POST.get("category")
         article_content = request.POST.get('article_content')
-        desc = article_content[0:150] + "..."
-        tags = ALLOWED_TAGS + ['img']
+        if title & category & category & c:
+            return HttpResponse("有标签或内容没有填写")
+
+        bs = BeautifulSoup(article_content, "html.parser")
+        desc = bs.text[0:150] + "..."
+        tags = ALLOWED_TAGS + ['img', 'h1', 'h2', 'h3', 'h4', 'h5', 'sup', 'big', 'small', 'p', 'span', 'br',
+                               'dfn', 'div', 'cite', 'font', 'strike', 'sub', 'tt', 'u', 'pre']
         attributes = {**ALLOWED_ATTRIBUTES, 'img': ['src']}
         cleaned_content = bleach.clean(article_content, tags=tags, attributes=attributes)
         category_id = Category.objects.filter(name=category).first().pk
-        article = Article.objects.create(title=title, desc=desc, body=cleaned_content, author_id=request.user.pk, category_id=category_id)
-        article_pk=article.pk
+        article = Article.objects.create(title=title, desc=desc, body=cleaned_content, author_id=request.user.pk,
+                                         category_id=category_id)
+        article_pk = article.pk
+
         for title in tag:
             id = Tag.objects.filter(title=title).first().pk
-            print(id,title)
-            Article2Tag.objects.create(article_id=article_pk,tag_id=id)
+            print(id, title)
+            Article2Tag.objects.create(article_id=article_pk, tag_id=id)
 
-
-
-
-
-        # atticle_obj=Article.objects.create(title=title,ca)
-
-
-
-    category_list=Category.objects.all()
-    tags_list=Tag.objects.all()
-    return render(request,"add_article.html",{"category_list":category_list,"tags_list":tags_list})
-
-
-
-
-
+    category_list = Category.objects.all()
+    tags_list = Tag.objects.all()
+    return render(request, "add_article.html", {"category_list": category_list, "tags_list": tags_list})
 
 
 def article_image_upload(request):
+    '''图片上传'''
     obj = request.FILES.get("upload_img")
     path = os.path.join(settings.MEDIA_ROOT, "article_img", obj.name)
     with open(path, "wb") as f:
@@ -151,3 +145,62 @@ def article_image_upload(request):
     }
 
     return JsonResponse(res)
+
+
+def article_list_forme(request, pk):
+    '''个人文章列表'''
+    article_list = Article.objects.filter(author_id=pk)
+    return render(request, "article_list_forme.html", {"article_list": article_list})
+
+
+def article_detele(request):
+    '''文章删除'''
+    id = request.POST.get("id")
+    Article.objects.filter(id=id).delete()
+    return JsonResponse({})
+
+
+def article_editor(request, id):
+    '''文章修改'''
+    print(request.path)
+    article = Article.objects.filter(id=id).first()
+    category_list = Category.objects.all()
+    tags_list = Tag.objects.all()
+    editor = True
+    return render(request, "editor_article.html",
+                  {"article": article, editor: "editor", "category_list": category_list, "tags_list": tags_list})
+
+
+def article_editor_save(request):
+    "文章修改保存 直接把原来的文章删除 重新创建文章"
+    url=request.get_full_path()
+    url=url.split("=")
+    id=url[1]
+    Article.objects.filter(id=id).delete()
+
+    c = request.POST
+    c = dict(c)
+    tag = c['tag']
+    title = request.POST.get("title")
+    category = request.POST.get("category")
+    article_content = request.POST.get('article_content')
+
+    bs = BeautifulSoup(article_content, "html.parser")
+    desc = bs.text[0:150] + "..."
+    tags = ALLOWED_TAGS + ['img', 'h1', 'h2', 'h3', 'h4', 'h5', 'sup', 'big', 'small', 'p', 'span', 'br',
+                           'dfn', 'div', 'cite', 'font', 'strike', 'sub', 'tt', 'u', 'pre']
+    attributes = {**ALLOWED_ATTRIBUTES, 'img': ['src']}
+    cleaned_content = bleach.clean(article_content, tags=tags, attributes=attributes)
+    category_id = Category.objects.filter(name=category).first().pk
+    article = Article.objects.create(title=title, desc=desc, body=cleaned_content, author_id=request.user.pk,
+                                    category_id=category_id)
+    article_pk = article.pk
+
+    for title in tag:
+        id = Tag.objects.filter(title=title).first().pk
+        print(id, title)
+        Article2Tag.objects.create(article_id=article_pk, tag_id=id)
+
+    return redirect(reverse("article:article_list_forme",args=(request.user.pk,)))
+
+

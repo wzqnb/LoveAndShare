@@ -21,8 +21,10 @@ if __name__ == '__main__':
     # print(obj_tag)
     # for
     # art=
-    tags=["c","c++","python"]
-    for title in tags:
-        tag_pk = Tag.objects.filter(title=title).first().pk
-        print(tag_pk)
-
+    article = Article.objects.filter(id=445).delete()
+    print(article)
+    print(len(article))
+    if article:
+        print("trew")
+    else:
+        print("falew")

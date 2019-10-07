@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block css %}
+
+    <style>
+        .color_editor {
+            background-color: green;
+        }
+
+        .color_del {
+            background-color: red;
+        }
+
+        .editor {
+            position: absolute;
+            right: 65px;
+        }
+
+        .del {
+            position: absolute;
+            right: 20px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    {% csrf_token %}
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><h4>我的文章</h4></div>
+        <ul class="list-group">
+            {% for article in article_list %}
+
+                <h4>
+                    <li class="list-group-item">
+                        {{ article.title }}
+                        <a href="#" class="editor" editor_article_id="{{ article.id }}"><span class=" badge color_editor ">重新编辑</span></a>
+
+
+
+                        <a href="#" article_id={{ article.id }} class="del"><span
+                                class=" badge color_del ">删除</span></a>
+                    </li>
+                    <br>
+
+                </h4>
+
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+
+    <script>
+        {#文章删除#}
+        $(".del").click(function () {
+            c = window.confirm("请确认删除");
+            if (c) {
+                var id = $(this).attr("article_id");
+                $.ajax({
+                    url: "/article/article_detele/",
+                    type: "post",
+                    data: {
+                        id: id,
+                        csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+
+                    },
+                    success: function (data) {
+                        alert("删除成功")
+                        window.location.reload();
+                    }
+
+                })
+
+            } else {
+
+            }
+
+        })
+
+        {#文章修改#}
+        $(".editor").click(function () {
+
+            var id = $(this).attr("editor_article_id");
+
+            window.open("/article/article_editor/"+id);
+
+
+             {#$.ajax({#}
+             {#       url: "/article/article_editor/",#}
+             {#       type: "post",#}
+             {#       data: {#}
+             {#           id: id,#}
+             {#           csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),#}
+             {##}
+             {#       },#}
+             {#       success: function (data) {#}
+             {#           #}
+             {#       }#}
+             {##}
+             {#   })#}
+        })
+
+
+
+
+
+    </script>
+
+
+
+
+
+{% endblock %}

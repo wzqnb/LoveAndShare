@@ -35,7 +35,16 @@ def get_article_tags():
 @register.inclusion_tag("recently_article.html")
 def get_recently_article():
     recently_article=Article.objects.all().order_by("-pub_time")[0:5]
-    print(recently_article)
+
     return {
         "recently_article": recently_article
     }
+
+
+@register.inclusion_tag("blogcategory.html")
+def blogcategory():
+    blog_category=Category.objects.all()
+    return {
+        "blog_category":blog_category
+    }
+

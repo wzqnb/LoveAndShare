@@ -27,11 +27,11 @@
 <div class="header"></div>
 <div class="content">
     <h3>添加文章</h3>
-    <form action="" method="post">
+    <form action="/article/article_editor_save/?id={{ article.id }}" method="post">
         {% csrf_token %}
         <div>
             <label for="">文章标题</label>
-            <input type="text" name="title" class="form-control" style="width: 500px" placeholder="最多200个字符">
+            <input type="text" name="title" class="form-control" style="width: 500px" value={{ article.title }}>
         </div>
         <div>
             <label for="">文章分类</label>
@@ -52,13 +52,11 @@
 
         <div>
             <p>内容(TinyMCE编辑器，支持拖放/粘贴上传图片) </p>
-            <textarea name="article_content" id="article_content" cols="60" rows="20"></textarea>
+            <textarea name="article_content" id="article_content" cols="60" rows="20">{{ article.body|safe }}</textarea>
         </div>
-        <input type="submit" class="btn btn-info">
+        <input type="submit" class="btn btn-info" name="id" value="提交">
     </form>
 </div>
-
-
 <script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
 <script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
 

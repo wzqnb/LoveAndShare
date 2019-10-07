@@ -2,13 +2,14 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static "css/article_updown.css" %}">
+
 {% endblock %}
 
 
 {% block content %}
 
     <div>
-        <h1>{{ article.title }}</h1>
+        <h1 align="center">{{ article.title }}</h1>
         <p>{{ article.body|safe }}</p>
     </div>
 
@@ -66,7 +67,7 @@
             <p>昵称：<input type="text" id="tbCommentAuthor" class="author" disabled="disabled" size="50"
                          value="{{ request.user.username }}"></p>
             <p>评论内容</p>
-            <textarea name="" id="comment_content" cols="60" rows="15"></textarea>
+            <textarea name="" id="comment_content" cols="60" rows="15" placeholder="最多1000个字符"></textarea>
             <p>
                 <button id="comment_btn">提交评论</button>
             </p>
