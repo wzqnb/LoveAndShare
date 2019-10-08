@@ -13,8 +13,16 @@ from .forms import RegForm
 from django.contrib.auth import get_user_model
 import base64
 from utils.pager import PageInfo
+from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 
 User = get_user_model()
+
+def refresh_blog(request):
+    cache.clear()
+    c=reverse("userinfo:index")
+    print(c)
+    return redirect(reverse("userinfo:index"))
 
 
 def test(request):
@@ -25,7 +33,7 @@ def test(request):
     return render(request,"test.html",{"h":h})
 
 
-
+@cache_page(60*60)
 def index(request):
     count=Article.objects.all().count()
     page_info = PageInfo(request.GET.get('page'), count, 8, '/userinfo/index/', 11)

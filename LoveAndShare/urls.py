@@ -24,6 +24,7 @@ import xadmin
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path("xadmin/",xadmin.site.urls),
     path("",views.index,name="Zindex"),
     path("search/",include("haystack.urls")),

@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/',views.register,name='register'),
     path('logout/',views.logout,name='logout'),
     path('test/',views.test,name='test'),
+    path('refresh_blog/',views.refresh_blog,name='refresh_blog'),
     path('get_img_captcha/',views.get_img_captcha,name='get_img_captcha'),
     path('get_phonecaptcha/',views.get_phonecaptcha,name='get_phonecaptcha'),
     path('check_phone_exist/',views.check_phone_exist,name='check_phone_exist'),

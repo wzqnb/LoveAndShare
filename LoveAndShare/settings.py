@@ -52,6 +52,12 @@ INSTALLED_APPS = [
     'userinfo',
     'article',
 
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.weibo',
+
 
 
 ]
@@ -192,4 +198,28 @@ LOGIN_URL='/userinfo/login'
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_TIME_FORMAT = '%Y-%m-%d'
 
+ # django-allauth相关设置
+AUTHENTICATION_BACKENDS = (
+      # django admin所使用的用户登录与django-allauth无关
+      'django.contrib.auth.backends.ModelBackend',
+      # allauth 身份验证
+      'allauth.account.auth_backends.AuthenticationBackend',
+)
 
+#app django.contrib.sites需要的设置
+SITE_ID = 1
+# 指定要使用的登录方法(用户名、电子邮件地址两者之一)
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# 要求用户注册时必须填写email
+ACCOUNT_EMAIL_REQUIRED = True
+
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+
+# 邮箱设定
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '1843326800@qq.com' # 你的 QQ 账号和授权码
+EMAIL_HOST_PASSWORD = '1234567yY'
+EMAIL_USE_TLS = True# 这里必须是 True，否则发送不成功
+EMAIL_FROM = '1843326800@qq.com' # 你的 QQ 账号
+DEFAULT_FROM_EMAIL = '1843326800@qq.com'

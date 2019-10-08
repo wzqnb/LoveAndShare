@@ -7,6 +7,8 @@ from LoveAndShare import settings
 import os
 from bs4 import BeautifulSoup
 import html
+from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
+from django.views.decorators.cache import cache_page
 import bleach
 
 
@@ -26,7 +28,7 @@ def article_detail(request, id):
     else:
         return HttpResponse("404")
 
-
+@cache_page(60*60*24)
 def article_category(request, category):
     '''文章分类'''
     category_obj = Category.objects.filter(name=category).first()
@@ -34,14 +36,14 @@ def article_category(request, category):
 
     return render(request, "article_list.html", {"article_list": category_article})
 
-
+@cache_page(60*60*24)
 def article_tag(request, tag):
     '''文章标签'''
     tag = Tag.objects.filter(title=tag).first()
     tag_article = tag.article_set.all()
     return render(request, "article_list.html", {"article_list": tag_article})
 
-
+@cache_page(60*60*24)
 def article_archive(request):
     '''文章归档'''
     article_list = Article.objects.all().order_by("-pub_time")
@@ -84,10 +86,13 @@ def comment(request):
     if not pid:
         # 父评论
         comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content)
+        Article.objects.filter(pk=article_id).update(comment_count=F("comment_count") + 1)
     else:
         # 子评论
         comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content,
                                              parent_comment_id=pid)
+        Article.objects.filter(pk=article_id).update(comment_count=F("comment_count") + 1)
+
 
     response["create_time"] = comment_obj.create_time.strftime("%Y-%m-%d")
     response["content"] = comment_obj.content
@@ -95,7 +100,6 @@ def comment(request):
     return JsonResponse(response)
 
 
-from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
 
 
 def article_add(request):
@@ -107,8 +111,6 @@ def article_add(request):
         title = request.POST.get("title")
         category = request.POST.get("category")
         article_content = request.POST.get('article_content')
-        if title & category & category & c:
-            return HttpResponse("有标签或内容没有填写")
 
         bs = BeautifulSoup(article_content, "html.parser")
         desc = bs.text[0:150] + "..."

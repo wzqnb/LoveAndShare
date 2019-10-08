@@ -4,6 +4,8 @@
 
 from django import template
 from userinfo.models import Article,Category,Tag
+from django.views.decorators.cache import cache_page
+
 
 register=template.Library()
 
@@ -34,7 +36,7 @@ def get_article_tags():
 
 @register.inclusion_tag("recently_article.html")
 def get_recently_article():
-    recently_article=Article.objects.all().order_by("-pub_time")[0:5]
+    recently_article=Article.objects.all().order_by("-pub_time")[0:8]
 
     return {
         "recently_article": recently_article
