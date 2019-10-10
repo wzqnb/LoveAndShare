@@ -33,7 +33,7 @@ def test(request):
     return render(request,"test.html",{"h":h})
 
 
-@cache_page(60*60)
+# @cache_page(60*60)
 def index(request):
     count=Article.objects.all().count()
     page_info = PageInfo(request.GET.get('page'), count, 8, '/userinfo/index/', 11)
@@ -56,6 +56,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                cache.clear()
                 return restful.ok(data=reverse("userinfo:index"))
             else:
                 return restful.params_error(message="账号或密码错误")

@@ -2,22 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6292cd13-d6c1-4f40-96c4-09869d8efce5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/img/top.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/e1bd94fc-8320-49a1-9030-440907ae2295.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e1bd94fc-8320-49a1-9030-440907ae2295.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LoveAndShare/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LoveAndShare/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LoveAndShare/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LoveAndShare/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/article/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/article/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/userinfo/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/userinfo/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/userinfo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0002_auto_20190927_1534.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0003_auto_20190927_1541.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0004_auto_20190927_1546.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0005_auto_20190929_1530.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0006_articleupdown_comment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0007_article_desc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0008_auto_20191006_2047.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/userinfo/migrations/0009_auto_20191007_1423.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/userinfo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/userinfo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/article_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article_category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/article_list_forme.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article_list_forme.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/css.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_43e346xlcomjawan.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_7ncqy20zza3ndivk.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoosh_index/_MAIN_56.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_0n9bqbr75g5vkqnp.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_4nrxug05x0u6z49r.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoosh_index/_MAIN_71.toc" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +88,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/media/img" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -92,17 +100,17 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\static" />
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps" />
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps\userinfo" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\media\img" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\static" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\templates" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\static\editor.md" />
       <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\extra_apps" />
-      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\media\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\static" />
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps" />
+      <recent name="C:\Users\1843326800\PycharmProjects\LoveAndShare\apps\userinfo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -118,7 +126,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Django server.LoveAndShare">
-    <configuration name="test.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/LoveAndShare/templates/test.html" useBuiltInWebServerPort="true">
+    <configuration name="test.html" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost:63342/LoveAndShare/templates/test.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="ormtest" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -217,13 +225,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="LoveAndShare.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\1843326800\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
+      <option name="port" value="8001" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
@@ -233,11 +241,18 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Django server.LoveAndShare" />
+      <item itemvalue="JavaScript Debug.test.html" />
+      <item itemvalue="Python.ormtest" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.tests" />
+      <item itemvalue="Python.xss" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.tests" />
         <item itemvalue="Python.test" />
-        <item itemvalue="JavaScript Debug.test.html" />
         <item itemvalue="Python.ormtest" />
         <item itemvalue="Python.xss" />
       </list>
@@ -247,7 +262,12 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@913323c6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>

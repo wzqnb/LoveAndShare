@@ -19,13 +19,11 @@ from django.conf.urls import url
 from django.views.static import serve
 from LoveAndShare.settings import MEDIA_ROOT
 from userinfo import views
-import xadmin
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path("xadmin/",xadmin.site.urls),
+
     path("",views.index,name="Zindex"),
     path("search/",include("haystack.urls")),
     re_path("media/(?P<path>.*)", serve, {"document_root": MEDIA_ROOT}),

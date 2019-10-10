@@ -43,9 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'xadmin',
-    'crispy_forms',
-    'reversion',
+
+
     'mdeditor',
     'compressor',
     'haystack',
@@ -213,7 +212,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 # 要求用户注册时必须填写email
 ACCOUNT_EMAIL_REQUIRED = True
 
-LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGIN_REDIRECT_URL = '/userinfo/index/'
 
 # 邮箱设定
 EMAIL_HOST = 'smtp.qq.com'
