@@ -19,11 +19,19 @@ from django.conf.urls import url
 from django.views.static import serve
 from LoveAndShare.settings import MEDIA_ROOT
 from userinfo import views
+<<<<<<< HEAD
 import notifications.urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+=======
+
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+
+>>>>>>> e787130164fc48365c253e7ee3b929ec43003971
     path("",views.index,name="Zindex"),
     path("search/",include("haystack.urls")),
     re_path("media/(?P<path>.*)", serve, {"document_root": MEDIA_ROOT}),
