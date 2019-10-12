@@ -48,9 +48,14 @@ INSTALLED_APPS = [
     'reversion',
     'mdeditor',
     'compressor',
+    'notifications',
     'haystack',
+
+
     'userinfo',
     'article',
+    'notice',
+
 
     'django.contrib.sites',
     'allauth',
@@ -107,14 +112,19 @@ STATICFILES_FINDERS = (
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'LoveAndShare',
-        'PASSWORD':"123456",
-        'PORT':3306,
-        'HOST':'127.0.0.1',
-        "USER":'root',
-        "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'LoveAndShare',
+    #     'PASSWORD':"123456",
+    #     'PORT':3306,
+    #     'HOST':'127.0.0.1',
+    #     "USER":'root',
+    #     "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
+    # }
+
+'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

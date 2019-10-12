@@ -21,10 +21,9 @@ if __name__ == '__main__':
     # print(obj_tag)
     # for
     # art=
-    article = Article.objects.filter(id=445).delete()
-    print(article)
-    print(len(article))
-    if article:
-        print("trew")
-    else:
-        print("falew")
+    article_id=4
+    article_obj = Article.objects.filter(id=article_id).first()
+    article_obj = UserInfo.objects.filter(id=article_obj.author.id).first()
+    print(article_obj.id)
+    print(article_obj.username)
+    print(article_obj.password)

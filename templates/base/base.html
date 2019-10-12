@@ -2,6 +2,8 @@
 {% load static %}
 {% load cache %}
 {% load compress %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +11,18 @@
     <title>LoveAndShare</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/base.css">
-
     {% block css %}
     {% endblock %}
+    <style>
+        .top {
+            right: 7%;
+            bottom: 10%;
+            position: fixed;
+        }
+        .notice{
+            background-color: red;
+        }
+    </style>
 
 </head>
 <script src="/static/jquery-3.3.1.js"></script>
@@ -22,7 +33,6 @@
         {#导航栏#}
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
-
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -33,8 +43,6 @@
                     </button>
                     <a class="navbar-brand" href="#">LoveAndShare</a>
                 </div>
-
-
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active" id="index"><a href="{% url "userinfo:index" %}">主页 <span class="sr-only">(current)</span></a>
@@ -45,24 +53,45 @@
                                aria-haspopup="true"
                                aria-expanded="false">文章分类 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                               {% blogcategory %}
+                                {% blogcategory %}
                             </ul>
                         </li>
                         <li><a href="#" id="video">视频教学</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.username %}
-                             <li class="dropdown" >
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">{{ request.user.username }}<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url "article:article_list_forme" request.user.pk %}">我的文章列表</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url "article:article_add" %}">添加文章</a></li>
-                                <li role="separator" class="divider"></li>
-                            </ul>
-                        </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    {% if unread_count %}
+                                        <svg viewBox="0 0 8 8"
+                                             width="8px"
+                                             height="8px">
+                                            <circle cx="4"
+                                                    cy="4"
+                                                    r="4"
+                                                    fill="#ff6b6b"
+                                            ></circle>
+                                        </svg>
+                                    {% endif %}{{ request.user.username }}<span class="caret"></span></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link dropdown-toggle" ...>
+                                        <a class="dropdown-item" href="{% url "notice:list" %}">我的通知
+                                            {% if unread_count %}
+                                                <span class="badge badge-danger notice">{{ unread_count }}</span>
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url "article:article_list_forme" request.user.pk %}">我的文章列表</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url "article:article_add" %}">添加文章</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+
 
                             <li><a href="{% url "userinfo:logout" %}">退出</a></li>
                         {% else %}
@@ -82,14 +111,12 @@
         {#版心#}
         <div class="container">
             <div class="row">
-                {#        内容#}
                 <div class="col-md-9">
                     <!-- 文章列表 开始 -->
                     {% block content %}
                     {% endblock %}
                     <!-- 文章列表 结束-->
                 </div>
-                {#        内容#}
                 {#        边栏#}
                 <div class="col-md-3">
                     {#                    搜索#}
@@ -97,11 +124,13 @@
                         <div class="col-lg-12">
                             <div class="input-group">
                                 <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-                                    <input type="search" name="q" placeholder="Search for..." required class="form-control" >
-                                    <button type="submit" class="btn btn-default search" ><span class="ion-ios-search-strong">search</span></button>
+                                    <input type="search" name="q" placeholder="Search for..." required
+                                           class="form-control">
+                                    <button type="submit" class="btn btn-default search"><span
+                                            class="ion-ios-search-strong">search</span></button>
                                 </form>
 
-{#<span class="ion-ios-search-strong">搜素</span>#}
+                                {#<span class="ion-ios-search-strong">搜素</span>#}
 
 
                             </div><!-- /input-group -->
@@ -117,6 +146,7 @@
                     {% get_article_tags %}
                     {#  最近发布#}
                     {% get_recently_article %}
+                    {#       github#}
                     <aside class="widget widget_text"><h5 class="widget-title">欢迎您star或者fork本站源代码</h5>
                         <div class="textwidget">
                             <p><a href="https://github.com/wzqnb/LoveAndShare" rel="nofollow">
@@ -132,10 +162,12 @@
                         </div>
                     </aside>
 
-
-{# 刷新网站#}
+                    {# 刷新网站#}
                     <div>
-                        <a href="/userinfo/refresh_blog/"><button id="refresh_site" class="label label-primary" style="text-align:center" >刷新网站</button></a>
+                        <a href="/userinfo/refresh_blog/">
+                            <button id="refresh_site" class="label label-primary" style="text-align:center">刷新网站
+                            </button>
+                        </a>
                     </div>
 
                 </div>
@@ -145,22 +177,19 @@
         {#版心#}
         {#    分页#}
         {% block page %}
-
         {% endblock %}
         {#    分页#}
-
         {#底部#}
     </div>
 </div>
 
 <footer class="footer" role="contentinfo">
+    <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img src="/media/img/top.jpg" alt="" width="42" height="42">
+    </button>
     <div class="site-info" style="text-align: center">
         Copyright©&nbsp;2019&nbsp;
         <a href="/" target="blank">LoveAndShare</a>
         &nbsp;|&nbsp;
-
-
-
         <a href="/feed" title="RSS Feed" target="_blank">
             RSS Feed
         </a>
@@ -170,18 +199,14 @@
         </a>
         |&nbsp; Hosting On&nbsp;
         <a href="https://www.linode.com/?r=b0d38794d05ef8816b357a929106e89b7c6452f9" target="blank" rel="nofollow">Linode</a>
-
         |&nbsp;
         <a href="https://tongji.baidu.com/sc-web/3478620/home/ico?siteId=11261596" target="_blank"
            rel="nofollow">百度统计</a>
-
-
     </div>
     <div class="site-info" style="text-align: center">
         Powered by
         <a href="https://www.djangoproject.com/" rel="nofollow" target="blank">Django</a>
         &nbsp;|&nbsp;
-
         <a href="https://github.com/wzqnb/LoveAndShare" target="blank">wzqnp</a>
         |
         本页面加载耗时:0.136s
@@ -196,10 +221,23 @@
 
     </div>
 
-
-
 </footer>
 
+<script>
+    // 向上滚动的函数
+    $(function () {
+        $('#BackTop').click(function () {
+            $('html,body').animate({scrollTop: 0}, 500);
+        });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('#BackTop').fadeIn(300);
+            } else {
+                $('#BackTop').stop().fadeOut(300);
+            }
+        }).scroll();
+    });
+</script>
 
 </body>
 </html>

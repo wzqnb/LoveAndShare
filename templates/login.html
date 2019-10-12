@@ -83,10 +83,10 @@
             url: "/userinfo/login/",
             type: "post",
             data: {
-                "username": username,
-                "password": password,
-                "valid_code": valid_code,
-                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+                username: username,
+                password: password,
+                valid_code: valid_code,
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
             },
             success: function (data) {
                 {#console.log(data);#}

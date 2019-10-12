@@ -10,6 +10,7 @@ import html
 from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
 from django.views.decorators.cache import cache_page
 import bleach
+from notifications.signals import notify
 
 
 from django.core.cache import cache
@@ -24,7 +25,7 @@ def article_detail(request, id):
     Article.objects.filter(id=id).update(views=F("views") + 1)
     comment_list = Comment.objects.filter(article_id=id)
     if article:
-        return render(request, "article_detail.html", {"article": article, "comment_list": comment_list})
+        return render(request, "article/article_detail.html", {"article": article, "comment_list": comment_list})
     else:
         return HttpResponse("404")
 
@@ -34,33 +35,43 @@ def article_category(request, category):
     category_obj = Category.objects.filter(name=category).first()
     category_article = category_obj.article_set.all()
 
-    return render(request, "article_list.html", {"article_list": category_article})
+    return render(request, "article/article_list.html", {"article_list": category_article})
 
 @cache_page(60*60*24)
 def article_tag(request, tag):
     '''文章标签'''
     tag = Tag.objects.filter(title=tag).first()
     tag_article = tag.article_set.all()
-    return render(request, "article_list.html", {"article_list": tag_article})
+    return render(request, "article/article_list.html", {"article_list": tag_article})
 
 @cache_page(60*60*24)
 def article_archive(request):
     '''文章归档'''
     article_list = Article.objects.all().order_by("-pub_time")
 
-    return render(request, "article_archive.html", {"article_list": article_list})
+    return render(request, "article/article_archive.html", {"article_list": article_list})
 
 
 def article_updown(request):
     '''文章点赞或不喜欢'''
     article_id = request.POST.get("article_id")
+    article=Article.objects.filter(id=article_id)
     is_up = json.loads(request.POST.get('is_up'))
     user = request.user
     response = {"state": True}
+    article_obj = Article.objects.filter(id=article_id).first()
+    article_obj = article_obj.author.username
     try:
         ArticleUpDown.objects.create(user=user, article_id=article_id, is_up=is_up)
         if is_up:
             Article.objects.filter(pk=article_id).update(up_count=F("up_count") + 1)
+            notify.send(
+                request.user,
+                recipient=article_obj,
+                verb='回复了你',
+                target=article,
+                # action_object=new_comment,
+            )
         else:
             Article.objects.filter(pk=article_id).update(down_count=F("down_count") + 1)
         # user与articlie_id已经做了联合唯一索引 第一次点赞或踩都进行操作
@@ -79,16 +90,34 @@ def comment(request):
     # pid判断是子评论还是父评论
     pid = request.POST.get("pid")
     article_id = request.POST.get("article_id")
+    article = Article.objects.filter(id=article_id).first()
     content = request.POST.get("content")
     content = html.escape(content, quote=True)
     user_pk = request.user.pk
     response = {}
+    article_obj = Article.objects.filter(id=article_id).first()
+    article_obj = UserInfo.objects.filter(id=article_obj.author.id).first()
     if not pid:
         # 父评论
+
+        notify.send(
+            request.user,
+            recipient=article_obj,
+            verb='回复了你',
+            target=article,
+            # action_object=new_comment,
+        )
         comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content)
         Article.objects.filter(pk=article_id).update(comment_count=F("comment_count") + 1)
     else:
         # 子评论
+        notify.send(
+            request.user,
+            recipient=article_obj,
+            verb='回复了你',
+            target=article,
+            # action_object=new_comment,
+        )
         comment_obj = Comment.objects.create(article_id=article_id, user_id=user_pk, content=content,
                                              parent_comment_id=pid)
         Article.objects.filter(pk=article_id).update(comment_count=F("comment_count") + 1)
@@ -130,7 +159,7 @@ def article_add(request):
 
     category_list = Category.objects.all()
     tags_list = Tag.objects.all()
-    return render(request, "add_article.html", {"category_list": category_list, "tags_list": tags_list})
+    return render(request, "article/add_article.html", {"category_list": category_list, "tags_list": tags_list})
 
 
 def article_image_upload(request):
@@ -152,7 +181,7 @@ def article_image_upload(request):
 def article_list_forme(request, pk):
     '''个人文章列表'''
     article_list = Article.objects.filter(author_id=pk)
-    return render(request, "article_list_forme.html", {"article_list": article_list})
+    return render(request, "article/article_list_forme.html", {"article_list": article_list})
 
 
 def article_detele(request):
@@ -169,7 +198,7 @@ def article_editor(request, id):
     category_list = Category.objects.all()
     tags_list = Tag.objects.all()
     editor = True
-    return render(request, "editor_article.html",
+    return render(request, "article/editor_article.html",
                   {"article": article, editor: "editor", "category_list": category_list, "tags_list": tags_list})
 
 
@@ -203,6 +232,6 @@ def article_editor_save(request):
         print(id, title)
         Article2Tag.objects.create(article_id=article_pk, tag_id=id)
 
-    return redirect(reverse("article:article_list_forme",args=(request.user.pk,)))
+    return redirect(reverse("article/article:article_list_forme",args=(request.user.pk,)))
 
 
