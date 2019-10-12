@@ -205,9 +205,7 @@
                     var create_time = data.create_time;
                     var content = data.content;
                     var username = data.username;
-
-
-                    var comment_li = '<li class="list-group-item"><div><span style="color: gray">' + create_time + '</span> &nbsp;&nbsp; <a href=""><span>' + username + '</span></a></div> <div class="con"> <p> ' + content + ' </p> </div> </li>';
+                    var comment_li = '<li class="list-group-item" ><div><span style="color: gray">' + create_time + '</span> &nbsp;&nbsp; <a href=""><span>' + username + '</span></a></div> <div class="con"> <p> ' + content + ' </p> </div> </li>';
 
                     $(".comment_list").append(comment_li);
 
@@ -216,7 +214,6 @@
                     // 清空pid
                     pid = ""
                 }
-
 
 
             })

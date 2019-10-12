@@ -27,13 +27,7 @@ def refresh_blog(request):
 from notifications.signals import notify
 
 def test(request):
-    # notify.send(
-    #     request.user,
-    #     recipient=User.objects.filter(is_superuser=1),
-    #     verb='回复了你',
-    #     target=article,
-    #     action_object=new_comment,
-    # )
+
     pass
 
     # return render(request,"test.html",{"h":h})

@@ -21,6 +21,15 @@ class RegForm(forms.Form):
         )
     )
 
+    email = forms.EmailField(
+        required=True,
+        label="邮箱",
+        widget=forms.widgets.TextInput(
+            attrs={"class": "form-control"},
+        )
+                             )
+
+
     password=forms.CharField(
         min_length=6,
         max_length=16,

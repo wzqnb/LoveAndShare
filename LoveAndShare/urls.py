@@ -19,24 +19,25 @@ from django.conf.urls import url
 from django.views.static import serve
 from LoveAndShare.settings import MEDIA_ROOT
 from userinfo import views
-<<<<<<< HEAD
+
 import notifications.urls
 
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # 评论通知
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
-=======
-
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-
->>>>>>> e787130164fc48365c253e7ee3b929ec43003971
+    # 重置密码
+    path('password-reset/', include('password_reset.urls')),
     path("",views.index,name="Zindex"),
+    # 搜索
     path("search/",include("haystack.urls")),
+
     re_path("media/(?P<path>.*)", serve, {"document_root": MEDIA_ROOT}),
     path("userinfo/",include("userinfo.urls",namespace="userinfo")),
     path("article/",include("article.urls",namespace="article")),
     path("notice/",include("notice.urls",namespace="notice")),
 
 ]
+

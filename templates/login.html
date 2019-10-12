@@ -23,6 +23,11 @@
             bottom: 50px;
 
         }
+
+        #forget_passwd {
+            position: relative;
+            left: 18%;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +68,12 @@
                         <span class="login-error"></span>
                     </div>
                 </div>
-
+                <div id="forget_passwd">
+                    <h5>忘记密码了？</h5>
+                    <h5>点击<a href='{% url "password_reset_recover" %}'>这里</a>重置密码</h5>
+                </div>
             </form>
+
         </div>
     </div>
 </div>

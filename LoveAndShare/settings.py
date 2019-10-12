@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'compressor',
     'notifications',
     'haystack',
+    'password_reset',
 
 
     'userinfo',
@@ -162,10 +163,6 @@ USE_L10N = True
 
 USE_TZ = False
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 # 七牛云配置
 QINIU_ACCESS_KEY = 'N28DcWbEgqN9FzNy6BBTZYTSvc2o99VSqZjwPQ1G'
 QINIU_SECRET_KEY = '07cFzTFDZR1IUTSHsQiuM7SJJANmMRkUs4HEYuU2'
@@ -228,7 +225,7 @@ LOGIN_REDIRECT_URL = '/userinfo/index/'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '1843326800@qq.com' # 你的 QQ 账号和授权码
-EMAIL_HOST_PASSWORD = '1234567yY'
+EMAIL_HOST_PASSWORD = 'smfacwskfzzabbcc'
 EMAIL_USE_TLS = True# 这里必须是 True，否则发送不成功
 EMAIL_FROM = '1843326800@qq.com' # 你的 QQ 账号
 DEFAULT_FROM_EMAIL = '1843326800@qq.com'

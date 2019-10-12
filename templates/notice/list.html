@@ -20,6 +20,7 @@
         <ul class="list-group">
             {% for notice in notices %}
                 <li  id="notice_link">
+                <h3>
                     <a href="{% url "notice:update" %}?article_id={{ notice.target.id }}&notice_id={{ notice.id }}#comment_elem_{{ notice.action_object.id }}"
                        target="_blank"
                     >
@@ -29,6 +30,7 @@
                         在 <span style="color: #01a252;">{{ notice.target }}</span> {{ notice.verb }}。
                     </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.timestamp|date:"Y/m/d H:i" }}
+                    </h3>
                 </li>
             {% endfor %}
         </ul>
