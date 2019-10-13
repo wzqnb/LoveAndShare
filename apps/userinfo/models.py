@@ -7,7 +7,7 @@ from LoveAndShare import settings
 
 class UserInfo(AbstractUser):
     '''用户信息'''
-    phone = models.CharField(verbose_name="电话", max_length=11, unique=True)
+    phone = models.CharField(verbose_name="电话", max_length=11)
     avatar = models.FileField(verbose_name="头像", upload_to="avatars/", default="avatars/default.png")
     create_time = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
     email=models.EmailField(verbose_name='邮箱')

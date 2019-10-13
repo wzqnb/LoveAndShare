@@ -129,7 +129,8 @@ def register(request):
             print("passwd:", passwd)
             form_obj.cleaned_data.pop("re_password")
             avatar_img = request.FILES.get("avatar")
-
+            email=request.POST.get("email")
+            print("email",email)
             print("avatar:", avatar_img)
             code = request.POST.get("valid_code")
             print("获取的验证码：", code)

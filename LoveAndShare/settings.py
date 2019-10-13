@@ -61,7 +61,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     'allauth.socialaccount.providers.weibo',
+    'allauth.socialaccount.providers.github',
 
 
 
@@ -108,9 +110,6 @@ STATICFILES_FINDERS = (
 'django.contrib.staticfiles.finders.FileSystemFinder',
 'compressor.finders.CompressorFinder',)
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
@@ -129,9 +128,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -147,9 +143,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
 
@@ -226,6 +219,7 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '1843326800@qq.com' # 你的 QQ 账号和授权码
 EMAIL_HOST_PASSWORD = 'smfacwskfzzabbcc'
+# EMAIL_HOST_PASSWORD = '1234567yY'
 EMAIL_USE_TLS = True# 这里必须是 True，否则发送不成功
 EMAIL_FROM = '1843326800@qq.com' # 你的 QQ 账号
 DEFAULT_FROM_EMAIL = '1843326800@qq.com'

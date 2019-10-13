@@ -69,8 +69,17 @@
                     </div>
                 </div>
                 <div id="forget_passwd">
-                    <h5>忘记密码了？</h5>
-                    <h5>点击<a href='{% url "password_reset_recover" %}'>这里</a>重置密码</h5>
+{#                    <h5>忘记密码了？</h5>#}
+{#                    <h5>点击<a href='{% url "password_reset_recover" %}'>这里</a>重置密码</h5>#}
+{#                     <a class="secondaryAction layui-text" href="{% url 'account_reset_password' %}">#}
+{#                                忘记密码?#}
+{#                            </a>#}
+
+                    <small class="form-text text-muted ml-1">
+                            <a class="secondaryAction layui-text" href="{% url 'account_reset_password' %}">
+                                忘记密码?
+                            </a>
+                        </small>
                 </div>
             </form>
 

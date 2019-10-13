@@ -16,8 +16,6 @@
         .top{
         right: 7%;
         bottom: 10%;
-        {#background-color: red;#}
-
         position: fixed;
     }
     </style>
@@ -36,12 +34,11 @@
         }
     </style>
 
-
-
 </head>
 <script src="/static/jquery-3.3.1.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <body>
+
 <div class="wrap">
     <div class="main">
         {#导航栏#}
@@ -202,11 +199,23 @@
 
 
 <footer class="footer" role="contentinfo">
-    <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img src="/media/img/top.jpg" alt="" width="42" height="42">
-    </button>
+   <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img  src="/media/img/top.jpg" alt=""  width="42" height="42"></button>
 
-    <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img  src="/media/img/top.jpg" alt=""  width="42" height="42"></button>
-
+<script>
+    // 向上滚动的函数
+    $(function () {
+        $('#BackTop').click(function () {
+            $('html,body').animate({scrollTop: 0}, 500);
+        });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('#BackTop').fadeIn(300);
+            } else {
+                $('#BackTop').stop().fadeOut(300);
+            }
+        }).scroll();
+    });
+</script>
     <div class="site-info" style="text-align: center">
         Copyright©&nbsp;2019&nbsp;
         <a href="/" target="blank">LoveAndShare</a>
@@ -232,7 +241,6 @@
         |
         本页面加载耗时:0.136s
     </div>
-
     <div class="site-info" style="text-align: center">
         <a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">
             <p style=" height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
@@ -243,39 +251,6 @@
     </div>
 
 </footer>
-
-<script>
-    // 向上滚动的函数
-    $(function () {
-        $('#BackTop').click(function () {
-            $('html,body').animate({scrollTop: 0}, 500);
-        });
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 300) {
-                $('#BackTop').fadeIn(300);
-            } else {
-                $('#BackTop').stop().fadeOut(300);
-            }
-        }).scroll();
-    });
-</script>
-
-
-<script>
-    // 向上滚动的函数
-    $(function () {
-        $('#BackTop').click(function () {
-            $('html,body').animate({scrollTop: 0}, 500);
-        });
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 300) {
-                $('#BackTop').fadeIn(300);
-            } else {
-                $('#BackTop').stop().fadeOut(300);
-            }
-        }).scroll();
-    });
-</script>
 
 
 </body>
