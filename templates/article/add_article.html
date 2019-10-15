@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <script src="/static/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/qiniu-js@2.4.0/dist/qiniu.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -15,7 +16,6 @@
             height: 60px;
             background-color: #369;
         }
-
         .content {
             width: 80%;
             margin: 20px auto;
@@ -36,19 +36,15 @@
         <div>
             <label for="">文章分类</label>
             {% for category in category_list %}
-
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="category" value={{ category.name }} checked>{{ category.name }}
             {% endfor %}
         </div>
         <div>
             <label for="">文章标签</label>
-
             {% for tag in tags_list %}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input name="tag" type="checkbox" value={{ tag.title }}>{{ tag.title }} </label>
-
             {% endfor %}
         </div>
-
 
         <div>
             <p>内容(TinyMCE编辑器，支持拖放/粘贴上传图片) </p>
@@ -58,10 +54,8 @@
     </form>
 </div>
 
-
 <script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
 <script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
-
 
 <script>
     KindEditor.ready(function (K) {
@@ -69,6 +63,7 @@
             width: "800",
             height: "500px",
             uploadJson: "/article/article_image_upload/",
+
             extraFileUploadParams: {
                 csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
             },

@@ -1,9 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect,reverse
+from django.views.decorators.http import require_GET
 from userinfo.models import *
 from django.db.models import F
-from utils.pager import PageInfo
-from LoveAndShare import settings
 import os
 from bs4 import BeautifulSoup
 import html
@@ -11,13 +10,12 @@ from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
 from django.views.decorators.cache import cache_page
 import bleach
 from notifications.signals import notify
-
-
+import qiniu
+from LoveAndShare import settings
+from utils import restful
 from django.core.cache import cache
 import json
-
-
-# Create your views here.
+from qiniu import Auth, put_file, etag
 
 def article_detail(request, id):
     '''文章详情'''
@@ -51,7 +49,6 @@ def article_archive(request):
 
     return render(request, "article/article_archive.html", {"article_list": article_list})
 
-
 def article_updown(request):
     '''文章点赞或不喜欢'''
     article_id = request.POST.get("article_id")
@@ -82,7 +79,6 @@ def article_updown(request):
         response["fisrt_action"] = ArticleUpDown.objects.filter(user=user, article_id=article_id).first().is_up
         # 把点赞还是踩的状态拿出来
     return JsonResponse(response)
-
 
 def comment(request):
     import html
@@ -128,9 +124,6 @@ def comment(request):
     response["username"] = comment_obj.user.username
     return JsonResponse(response)
 
-
-
-
 def article_add(request):
     '''文章添加'''
     if request.method == "POST":
@@ -161,7 +154,6 @@ def article_add(request):
     tags_list = Tag.objects.all()
     return render(request, "article/add_article.html", {"category_list": category_list, "tags_list": tags_list})
 
-
 def article_image_upload(request):
     '''图片上传'''
     obj = request.FILES.get("upload_img")
@@ -170,10 +162,26 @@ def article_image_upload(request):
         for line in obj:
             f.write(line)
 
-    res = {
-        "error": 0,
-        "url": "/media/article_img/" + obj.name
-    }
+    access_key = settings.QINIU_ACCESS_KEY
+    secret_key = settings.QINIU_SECRET_KEY
+    q = qiniu.Auth(access_key, secret_key)
+    bucket = settings.QINIU_BUCKET_NAME
+    token = q.upload_token(bucket)
+    ret, info = put_file(token, None, path)
+
+    if info.status_code == 200:
+        # 表示上传成功, 返回文件名
+        res = {
+            "error": 0,
+            "url": "http://py9v5zj1h.bkt.clouddn.com"+"/"+ret["key"]
+        }
+    else:
+        # 上传七牛失败 使用本地的上传图片
+        res = {
+            "error": 0,
+            "url": "/media/article_img/" + obj.name
+        }
+
 
     return JsonResponse(res)
 
@@ -183,13 +191,11 @@ def article_list_forme(request, pk):
     article_list = Article.objects.filter(author_id=pk)
     return render(request, "article/article_list_forme.html", {"article_list": article_list})
 
-
 def article_detele(request):
     '''文章删除'''
     id = request.POST.get("id")
     Article.objects.filter(id=id).delete()
     return JsonResponse({})
-
 
 def article_editor(request, id):
     '''文章修改'''
@@ -201,14 +207,12 @@ def article_editor(request, id):
     return render(request, "article/editor_article.html",
                   {"article": article, editor: "editor", "category_list": category_list, "tags_list": tags_list})
 
-
 def article_editor_save(request):
     "文章修改保存 直接把原来的文章删除 重新创建文章"
     url=request.get_full_path()
     url=url.split("=")
     id=url[1]
     Article.objects.filter(id=id).delete()
-
     c = request.POST
     c = dict(c)
     tag = c['tag']
@@ -226,12 +230,11 @@ def article_editor_save(request):
     article = Article.objects.create(title=title, desc=desc, body=cleaned_content, author_id=request.user.pk,
                                     category_id=category_id)
     article_pk = article.pk
-
     for title in tag:
         id = Tag.objects.filter(title=title).first().pk
         print(id, title)
         Article2Tag.objects.create(article_id=article_pk, tag_id=id)
 
-    return redirect(reverse("article/article:article_list_forme",args=(request.user.pk,)))
+    return redirect(reverse("article:article_list_forme",args=(request.user.pk,)))
 
 

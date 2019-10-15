@@ -160,7 +160,8 @@ USE_TZ = False
 QINIU_ACCESS_KEY = 'N28DcWbEgqN9FzNy6BBTZYTSvc2o99VSqZjwPQ1G'
 QINIU_SECRET_KEY = '07cFzTFDZR1IUTSHsQiuM7SJJANmMRkUs4HEYuU2'
 QINIU_BUCKET_NAME = 'wenzhaoqing'
-QINIU_DOMAIN = 'http://7xqenu.com1.z0.glb.clouddn.com/'
+QINIU_DOMAIN = 'py9v5zj1h.bkt.clouddn.com'
+PREFIX_URL = 'http://'
 
 # 缓存配置
 CACHES = {
@@ -188,6 +189,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+
+
+# # 上传文件地址配置
+# MEDIA_URL = PREFIX_URL + QINIU_DOMAIN + "/"
+# # # 上传文件的存储引擎配置
+# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
