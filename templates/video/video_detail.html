@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+
+    <script src="{% static 'videojs/video.min.js' %}"></script>
+    <script src="{% static 'videojs/videojs-contrib-hls.min.js' %}"></script>
+    <script src="{% static 'videojs/videojs-contrib-quality-levels.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.bdstatic.com/jwplayer/latest/cyberplayer.js"></script>
+    <script src="{% static 'js/video_detail.js' %}"></script>
+
+{% endblock %}
+{% block content %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="video-group">
+                <span id="video-info" hidden data-video-url="{{ course.video_url }}"
+                      data-cover-url="{{ course.cover_url }}" data-course-id="{{ course.pk }}"></span>
+                <div id="playercontainer"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

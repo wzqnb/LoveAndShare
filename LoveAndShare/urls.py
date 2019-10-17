@@ -38,6 +38,7 @@ urlpatterns = [
     path("userinfo/",include("userinfo.urls",namespace="userinfo")),
     path("article/",include("article.urls",namespace="article")),
     path("notice/",include("notice.urls",namespace="notice")),
+    path("video/",include("video.urls",namespace="video")),
 
 ]
 

@@ -191,11 +191,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 
 
-# # 上传文件地址配置
-# MEDIA_URL = PREFIX_URL + QINIU_DOMAIN + "/"
-# # # 上传文件的存储引擎配置
-# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
@@ -230,3 +225,10 @@ EMAIL_HOST_PASSWORD = 'smfacwskfzzabbcc'
 EMAIL_USE_TLS = True# 这里必须是 True，否则发送不成功
 EMAIL_FROM = '1843326800@qq.com' # 你的 QQ 账号
 DEFAULT_FROM_EMAIL = '1843326800@qq.com'
+
+# 百度云点播
+
+Baibu_Access_Key='74cc7f67b1134030a7c37ee38a46c296'
+Baibu_User_Key='6f24b22e6b7a49cf'
+Baibu_User_Id='c768f78299924faea29cccf8c65d16e0'
+

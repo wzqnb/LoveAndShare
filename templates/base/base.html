@@ -67,7 +67,7 @@
                                 {% blogcategory %}
                             </ul>
                         </li>
-                        <li><a href="#" id="video">视频教学</a></li>
+                        <li><a href="{% url "video:course" %}" id="video">视频资料</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.username %}
