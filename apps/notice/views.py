@@ -29,11 +29,11 @@ class CommentNoticeUpdateView(View):
         notice_id = request.GET.get('notice_id')
         # 更新单条通知
         if notice_id:
-            # article = Article.objects.get(id=request.GET.get('article_id'))
+
             id=request.GET.get('article_id')
             request.user.notifications.get(id=notice_id).mark_as_read()
-
             return redirect(reverse("article:article_detail", args=(id,)))
+
         # 更新全部通知
         else:
             request.user.notifications.mark_all_as_read()

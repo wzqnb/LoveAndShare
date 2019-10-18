@@ -8,6 +8,9 @@ if __name__ == '__main__':
     import django
     django.setup()
     from userinfo.models import *
+    c=UserInfo.objects.filter(username="www").first()
+    print(c.username)
+    print(c.password)
 
     # c=Category.objects.filter(name="python").first()
     # print(c)
@@ -21,9 +24,3 @@ if __name__ == '__main__':
     # print(obj_tag)
     # for
     # art=
-    article_id=4
-    article_obj = Article.objects.filter(id=article_id).first()
-    article_obj = UserInfo.objects.filter(id=article_obj.author.id).first()
-    print(article_obj.id)
-    print(article_obj.username)
-    print(article_obj.password)

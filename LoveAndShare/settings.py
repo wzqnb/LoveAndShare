@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'userinfo',
     'article',
     'notice',
+    'video',
 
 
     'django.contrib.sites',

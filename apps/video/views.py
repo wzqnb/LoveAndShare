@@ -5,13 +5,16 @@ import time
 import os
 import hmac
 from utils import restful
+from .models import *
 
 # Create your views here.
 
 def course(request):
-    return render(request,"video/video_detail.html")
+    course_detail = Course.objects.all()
+    return render(request, "video/course.html", {"course_detail": course_detail})
 
-
+def course_detail(request,id):
+    pass
 
 def course_token(request):
     # video：是视频文件的完整链接
