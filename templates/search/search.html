@@ -1,17 +1,12 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% load highlight %}
 
 {% block content %}
-
-
     <div>
-
-
         {% if page %}
             {% for result in page %}
                 <a href="{% url "article:article_detail" result.object.pk %}">
                     <h3>{% highlight result.object.title with query %}</h3></a>
-
                 <p>{% highlight result.object.desc with query %}</p>
             {% endfor %}
         {% else %}

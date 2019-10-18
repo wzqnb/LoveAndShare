@@ -13,10 +13,21 @@ def course(request):
     course_detail = Course.objects.all()
     return render(request, "video/course.html", {"course_detail": course_detail})
 
-def course_detail(request,id):
-    pass
+def video_list(request,id):
+    course=Course.objects.filter(id=id).first()
+    video_list = course.video_set.all()
+    return render(request,"video/video_list.html",{"course":course,"video_list":video_list})
+
+def video_detail(request,id):
+    video=Video.objects.filter(id=id).first()
+
+    return  render(request,"video/video_detail.html",{"video":video})
+
+
+
 
 def course_token(request):
+    '''获取视频播放token'''
     # video：是视频文件的完整链接
     file = request.GET.get('video')
     expiration_time = int(time.time()) + 2 * 60 * 60

@@ -8,19 +8,11 @@ if __name__ == '__main__':
     import django
     django.setup()
     from userinfo.models import *
-    c=UserInfo.objects.filter(username="www").first()
-    print(c.username)
-    print(c.password)
+    from video.models import *
+    id=1
+    c = Course.objects.filter(id=id).first()
+    print(c.title)
+    print(c.pub_time)
+    video_list = c.video_set.all()
+    print(video_list)
 
-    # c=Category.objects.filter(name="python").first()
-    # print(c)
-    # obj=c.article_set.all()
-    # print(obj)
-
-
-    # tag=Tag.objects.filter(title="python").first()
-    # print(tag)
-    # obj_tag=tag.article_set.all()
-    # print(obj_tag)
-    # for
-    # art=

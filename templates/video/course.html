@@ -7,7 +7,7 @@
             {% for course in course_detail %}
                 <div class="col-md-4">
 
-                    <a href="{% url "video:course_detail" course.pk %}"><img src="/media/{{ course.img }}" alt="" width="240px" height="135px" ></a>
+                    <a href="{% url "video:video_list" course.pk %}"><img src="/media/{{ course.img }}" alt="" width="240px" height="135px" ></a>
                     <p>标题：{{ course.title }}</p>
                     <p>描述：{{ course.profile }}</p>
 

@@ -1,33 +1,46 @@
 function CourseDetail() {
 }
 
+
 CourseDetail.prototype.initPlayer = function () {
-    var e = $("#video-info"), t = e.attr("data-video-url"), o = e.attr("data-cover-url"), a = e.attr("data-course-id"),
-        i = cyberplayer("playercontainer").setup({
-            width: "100%",
-            height: "100%",
-            file: t,
-            image: o,
-            autostart: !1,
-            stretching: "uniform",
-            repeat: !1,
-            volume: 100,
-            controls: !0,
-            tokenEncrypt: !0,
-            ak: "74cc7f67b1134030a7c37ee38a46c296"
-        });
-    i.on("beforePlay", function (o) {
-        /m3u8/.test(o.file) && xfzajax.get({
+    var e = $("#video-info");
+    var videourl = e.attr("data-video-url");
+    var cover = e.attr("data-cover-url");
+    var id = e.attr("data-course-id");
+
+
+    var player = cyberplayer("playercontainer").setup({
+        width: 640,
+        height: 480,
+        file: videourl,
+        image: cover,
+        title: "LoveAndShare",
+        autostart: !1,
+        stretching: "uniform",
+        repeat: !1,
+        volume: 100,
+        controls: true,
+        tokenEncrypt: !0,
+        ak: "74cc7f67b1134030a7c37ee38a46c296"
+    });
+    player.on("beforePlay", function (e) {
+
+        if (!/m3u8/.test(e.file)) {
+            return;
+        }
+        $ajax.get({
             url: "/course/course_token/",
-            data: {video: t, course_id: a},
-            success: function (e) {
-                if (200 === e.code) {
-                    var t = e.data.token;
-                    i.setToken(o.file, t)
-                } else window.messageBox.showInfo(e.message), i.stop()
+            data: {video: videourl, course_id: id},
+            success: function (result) {
+                if (result['code'] === 200) {
+                    var token = result['data']['token'];
+                    player.setToken(e.file, token);
+                } else {
+                    alert('token错误！');
+                }
             },
-            fail: function (e) {
-                console.log(e)
+            fail: function (error) {
+                console.log(error)
             }
         })
     })

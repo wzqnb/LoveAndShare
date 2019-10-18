@@ -222,14 +222,13 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '1843326800@qq.com' # 你的 QQ 账号和授权码
 EMAIL_HOST_PASSWORD = 'smfacwskfzzabbcc'
-# EMAIL_HOST_PASSWORD = '1234567yY'
 EMAIL_USE_TLS = True# 这里必须是 True，否则发送不成功
 EMAIL_FROM = '1843326800@qq.com' # 你的 QQ 账号
 DEFAULT_FROM_EMAIL = '1843326800@qq.com'
 
 # 百度云点播
-
 Baibu_Access_Key='74cc7f67b1134030a7c37ee38a46c296'
 Baibu_User_Key='6f24b22e6b7a49cf'
 Baibu_User_Id='c768f78299924faea29cccf8c65d16e0'
+
 

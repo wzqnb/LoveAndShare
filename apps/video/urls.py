@@ -11,7 +11,8 @@ urlpatterns = [
 
     path('course_token/', views.course_token, name='course_token'),
     path('course/', views.course, name='course'),
-    path('course_detail/<int:id>/', views.course_detail, name='course_detail'),
+    path('video_list/<int:id>/', views.video_list, name='video_list'),
+    path('video_detail/<int:id>/', views.video_detail, name='video_detail'),
 
 ]
 

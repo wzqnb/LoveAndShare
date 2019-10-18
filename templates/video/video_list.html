@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+    <img src="/media/{{ course.img }}" alt="">
+    <p>标题：{{ course.title }}</p>
+    <p>简介：{{ course.profile }}</p>
+    <h3>视频：</h3>
+
+    <ul class="list-group">
+
+        {% for video in video_list %}
+            <a href="{% url "video:video_detail" video.pk %}">
+                <li class="list-group-item">{{ video.title }}</li>
+            </a>
+        {% endfor %}
+
+    </ul>
+
+
+
+{% endblock %}

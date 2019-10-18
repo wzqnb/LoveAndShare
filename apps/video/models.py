@@ -23,7 +23,6 @@ class Course(models.Model):
     img= models.FileField(verbose_name="图片", upload_to="video_img/", default="")
     profile = models.TextField()
     pub_time = models.DateTimeField(auto_now_add=True)
-
     class Meta:
         verbose_name = '视频名称'
         verbose_name_plural = verbose_name
@@ -32,7 +31,7 @@ class Course(models.Model):
         return self.title
 
 
-class Vidoe(models.Model):
+class Video(models.Model):
     title = models.CharField(max_length=200, verbose_name="视频")
     course = models.ForeignKey('Course', on_delete=models.DO_NOTHING)
     profile = models.TextField()
