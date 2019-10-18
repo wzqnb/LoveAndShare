@@ -238,3 +238,13 @@ def article_editor_save(request):
     return redirect(reverse("article:article_list_forme",args=(request.user.pk,)))
 
 
+def article_collect(request):
+    id=request.POST.get("id")
+    userid=request.POST.get("userid")
+    article_title=request.POST.get("article_title")
+    print(userid)
+    print(article_title)
+    print(id)
+    collect=Collect.objects.create(title=article_title,user_id=userid,article_id=id,flag=True)
+    return HttpResponse("gggggg")
+

@@ -18,6 +18,7 @@ urlpatterns = [
     path('article_detele/',views.article_detele,name='article_detele'),
     path('article_editor/<int:id>/',views.article_editor,name='article_editor'),
     path('article_editor_save/',views.article_editor_save,name='article_editor_save'),
+    path('article_collect/',views.article_collect,name='article_collect'),
 
 
 ]

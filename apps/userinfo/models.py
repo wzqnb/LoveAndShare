@@ -130,45 +130,19 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
 
 
-class BlogSettings(models.Model):
-    '''站点设置 '''
-    sitename = models.CharField("网站名称", max_length=200, null=False, blank=False, default='')
-    site_description = models.TextField("网站描述", max_length=1000, null=False, blank=False, default='')
-    site_seo_description = models.TextField("网站SEO描述", max_length=1000, null=False, blank=False, default='')
-    site_keywords = models.TextField("网站关键字", max_length=1000, null=False, blank=False, default='')
-    article_sub_length = models.IntegerField("文章摘要长度", default=300)
-    sidebar_article_count = models.IntegerField("侧边栏文章数目", default=10)
-    sidebar_comment_count = models.IntegerField("侧边栏评论数目", default=5)
-    show_google_adsense = models.BooleanField('是否显示谷歌广告', default=False)
-    google_adsense_codes = models.TextField('广告内容', max_length=2000, null=True, blank=True, default='')
-    open_site_comment = models.BooleanField('是否打开网站评论功能', default=True)
-    beiancode = models.CharField('备案号', max_length=2000, null=True, blank=True, default='')
-    analyticscode = models.TextField("网站统计代码", max_length=1000, null=False, blank=False, default='')
-    show_gongan_code = models.BooleanField('是否显示公安备案号', default=False, null=False)
-    gongan_beiancode = models.TextField('公安备案号', max_length=2000, null=True, blank=True, default='')
-    resource_path = models.CharField("静态文件保存地址", max_length=300, null=False, default='/var/www/resource/')
-
-    class Meta:
-        verbose_name = '网站配置'
-        verbose_name_plural = verbose_name
+class Collect(models.Model):
+    '''用户收藏'''
+    add_time=models.DateTimeField(default=datetime.now)
+    title=models.CharField(max_length=100)
+    user = models.ForeignKey(to="UserInfo", null=True, on_delete=models.CASCADE)
+    article = models.ForeignKey(to="Article", null=True, on_delete=models.CASCADE)
+    flag=models.BooleanField(default=False)
 
     def __str__(self):
-        return self.sitename
-
-
-class SideBar(models.Model):
-    """侧边栏,可以展示一些html内容"""
-    name = models.CharField('标题', max_length=100)
-    content = models.TextField("内容")
-    sequence = models.IntegerField('排序', unique=True)
-    is_enable = models.BooleanField('是否启用', default=True)
-    created_time = models.DateTimeField('创建时间', default=datetime.now)
-    last_mod_time = models.DateTimeField('修改时间', default=datetime.now)
+        return self.title
 
     class Meta:
-        ordering = ['sequence']
-        verbose_name = '侧边栏'
-        verbose_name_plural = verbose_name
 
-    def __str__(self):
-        return self.name
+        verbose_name="用户收藏"
+        verbose_name_plural=verbose_name
+

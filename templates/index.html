@@ -1,6 +1,18 @@
 {% extends "base/base.html" %}
+{% block css %}
+
+    <style>
+        #collect {
+
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+
 
 {% block content %}
+    {% csrf_token %}
 
     <div class="article-list">
         {% for article in article_list %}
@@ -27,6 +39,8 @@
                              aria-hidden="true"></i>评论({{ article.comment_count }})</span>&nbsp&nbsp
                     <span><i class="fa fa-thumbs-o-up fa-fw"
                              aria-hidden="true"></i>点赞({{ article.up_count }})</span>
+                    <span><i class="fa fa-thumbs-o-up fa-fw glyphicon glyphicon-heart-empty collect_btn"
+                             aria-hidden="true " collect="{{ article.id }}" userid="{{ request.user.id }}" article_title="{{ article.title }}"></i>收藏</span>
                 </div>
 
                 <hr>
@@ -34,6 +48,33 @@
         {% endfor %}
 
     </div>
+
+    <script>
+        $(".collect_btn").click(function () {
+            var id = $(this).attr("collect")
+            var userid = $(this).attr("userid")
+            var article_title = $(this).attr("article_title")
+
+            if (userid) {
+                $.ajax({
+                    type: "post",
+                    url: "/article/article_collect/",
+                    data: {
+                        id: id,
+                        userid:userid,
+                        article_title:article_title,
+                        csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+                    }
+                })
+            } else {
+                alert("请先登陆")
+            }
+
+
+        })
+
+
+    </script>
 {% endblock %}
 
 

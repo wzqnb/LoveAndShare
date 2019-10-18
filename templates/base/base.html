@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/base.css">
     <style>
-        .top{
-        right: 7%;
-        bottom: 10%;
-        position: fixed;
-    }
+        .top {
+            right: 7%;
+            bottom: 10%;
+            position: fixed;
+        }
     </style>
 
 
@@ -30,7 +30,8 @@
             bottom: 10%;
             position: fixed;
         }
-        .notice{
+
+        .notice {
             background-color: red;
         }
     </style>
@@ -99,6 +100,8 @@
                                     <li><a href="{% url "article:article_list_forme" request.user.pk %}">我的文章列表</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{% url "article:article_add" %}">添加文章</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{% url "article:article_add" %}">我的收藏</a></li>
                                     <li role="separator" class="divider"></li>
                                 </ul>
                             </li>
@@ -180,7 +183,10 @@
                             </button>
                         </a>
 
-                        <a href="/userinfo/refresh_blog/"><button id="refresh_site" class="label label-primary" style="text-align:center" >刷新网站</button></a>
+                        <a href="/userinfo/refresh_blog/">
+                            <button id="refresh_site" class="label label-primary" style="text-align:center">刷新网站
+                            </button>
+                        </a>
 
                     </div>
 
@@ -199,23 +205,25 @@
 
 
 <footer class="footer" role="contentinfo">
-   <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img  src="/media/img/top.jpg" alt=""  width="42" height="42"></button>
+    <button type="button" id="BackTop" class="toTop-arrow top" style="z-index: 100;"><img src="/media/img/top.jpg"
+                                                                                          alt="" width="42" height="42">
+    </button>
 
-<script>
-    // 向上滚动的函数
-    $(function () {
-        $('#BackTop').click(function () {
-            $('html,body').animate({scrollTop: 0}, 500);
+    <script>
+        // 向上滚动的函数
+        $(function () {
+            $('#BackTop').click(function () {
+                $('html,body').animate({scrollTop: 0}, 500);
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('#BackTop').fadeIn(300);
+                } else {
+                    $('#BackTop').stop().fadeOut(300);
+                }
+            }).scroll();
         });
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 300) {
-                $('#BackTop').fadeIn(300);
-            } else {
-                $('#BackTop').stop().fadeOut(300);
-            }
-        }).scroll();
-    });
-</script>
+    </script>
     <div class="site-info" style="text-align: center">
         Copyright©&nbsp;2019&nbsp;
         <a href="/" target="blank">LoveAndShare</a>
