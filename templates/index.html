@@ -2,13 +2,11 @@
 {% block css %}
 
     <style>
-        #collect {
-
+        .collect {
             color: red;
         }
     </style>
 {% endblock %}
-
 
 
 {% block content %}
@@ -39,8 +37,10 @@
                              aria-hidden="true"></i>评论({{ article.comment_count }})</span>&nbsp&nbsp
                     <span><i class="fa fa-thumbs-o-up fa-fw"
                              aria-hidden="true"></i>点赞({{ article.up_count }})</span>
-                    <span><i class="fa fa-thumbs-o-up fa-fw glyphicon glyphicon-heart-empty collect_btn"
-                             aria-hidden="true " collect="{{ article.id }}" userid="{{ request.user.id }}" article_title="{{ article.title }}"></i>收藏</span>
+                    <span><i
+                            class="fa fa-thumbs-o-up fa-fw glyphicon glyphicon-heart-empty collect_btn "
+                            aria-hidden="true " article_id="{{ article.id }}" userid="{{ request.user.id }}"
+                            article_title="{{ article.title }}"></i>收藏</span>
                 </div>
 
                 <hr>
@@ -51,25 +51,37 @@
 
     <script>
         $(".collect_btn").click(function () {
-            var id = $(this).attr("collect")
+            var id = $(this).attr("article_id")
             var userid = $(this).attr("userid")
             var article_title = $(this).attr("article_title")
-
+            var that = this;
             if (userid) {
                 $.ajax({
                     type: "post",
                     url: "/article/article_collect/",
                     data: {
                         id: id,
-                        userid:userid,
-                        article_title:article_title,
+                        userid: userid,
+                        article_title: article_title,
                         csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
-                    }
+                    },
+                    success: function (data) {
+
+                        if (data.state == true) {
+                            $(that).addClass("collect")
+                            if(data.exit==true){
+                                alert("已经收藏了！")
+                                return;
+                            }
+                            alert("收藏成功")
+                        } else {
+                            alert("收藏失败")
+                        }
+                    },
                 })
             } else {
                 alert("请先登陆")
             }
-
 
         })
 

@@ -133,7 +133,6 @@ def article_add(request):
         title = request.POST.get("title")
         category = request.POST.get("category")
         article_content = request.POST.get('article_content')
-
         bs = BeautifulSoup(article_content, "html.parser")
         desc = bs.text[0:150] + "..."
         tags = ALLOWED_TAGS + ['img', 'h1', 'h2', 'h3', 'h4', 'h5', 'sup', 'big', 'small', 'p', 'span', 'br',
@@ -144,7 +143,6 @@ def article_add(request):
         article = Article.objects.create(title=title, desc=desc, body=cleaned_content, author_id=request.user.pk,
                                          category_id=category_id)
         article_pk = article.pk
-
         for title in tag:
             id = Tag.objects.filter(title=title).first().pk
             print(id, title)
@@ -239,12 +237,39 @@ def article_editor_save(request):
 
 
 def article_collect(request):
+    '''文章收藏'''
     id=request.POST.get("id")
     userid=request.POST.get("userid")
     article_title=request.POST.get("article_title")
-    print(userid)
-    print(article_title)
-    print(id)
-    collect=Collect.objects.create(title=article_title,user_id=userid,article_id=id,flag=True)
-    return HttpResponse("gggggg")
+    response={}
+    exit_collect_obj=Collect.objects.filter(user_id=userid,article_id=id)
+    if exit_collect_obj:
+        response["exit"]=True
+        response["state"] = True
+        return JsonResponse(response)
+    try:
+        collect=Collect.objects.create(title=article_title,user_id=userid,article_id=id,flag=True)
+        response["state"] = True
+        response["exit"] = False
+        return JsonResponse(response)
+    except Exception as e:
+        response["state"] = False
+        response["exit"] = False
+        return JsonResponse(response)
 
+def article_collect_list(request,id):
+    '''文章收藏列表'''
+    collect_list=Collect.objects.filter(user_id=id).all()
+    return render(request,"article/article_collect.html",{"collect_list":collect_list})
+
+def article_collect_detele(request):
+    id=request.POST.get("id")
+    response = {}
+    collect=Collect.objects.filter(id=id).delete()
+    print("del",collect)
+    if collect:
+        response["state"]=True
+        return JsonResponse(response)
+    else:
+        response["state"] = False
+        return JsonResponse(response)

@@ -101,7 +101,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{% url "article:article_add" %}">添加文章</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{% url "article:article_add" %}">我的收藏</a></li>
+                                    <li><a href="{% url "article:article_collect_list" request.user.pk %}">我的收藏</a></li>
                                     <li role="separator" class="divider"></li>
                                 </ul>
                             </li>

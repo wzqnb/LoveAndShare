@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+{% block css %}
+
+    <style>
+
+
+        .color_del {
+            background-color: red;
+        }
+
+        
+        .del {
+            position: absolute;
+            right: 20px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    {% csrf_token %}
+
+    <div class="panel panel-info">
+        <div class="panel-heading"><h4>我的收藏</h4></div>
+        <ul class="list-group">
+            {% for collect in collect_list %}
+
+                <h4>
+                    <li class="list-group-item">
+                        <a href="{% url "article:article_detail" collect.article_id %}">{{ collect.title }}</a>
+                        <a href="#" collect_id={{ collect.id }} class="del"><span
+                                class=" badge color_del ">删除</span></a>
+                    </li>
+
+
+                </h4>
+
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+
+    <script>
+        {#文章删除#}
+        $(".del").click(function () {
+            c = window.confirm("请确认删除");
+            if (c) {
+                var id = $(this).attr("collect_id");
+                $.ajax({
+                    url: "/article/article_collect_detele/",
+                    type: "post",
+                    data: {
+                        id: id,
+                        csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+
+                    },
+                    success: function (data) {
+                        if (data.state == true) {
+                            alert("删除成功")
+                            window.location.reload();
+                        } else {
+                            alert("删除失败")
+                            window.location.reload();
+                        }
+
+                    }
+
+                })
+
+            } else {
+
+            }
+
+        })
+
+
+    </script>
+
+
+
+
+
+{% endblock %}
