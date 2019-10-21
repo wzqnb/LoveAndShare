@@ -28,9 +28,9 @@ from notifications.signals import notify
 
 def test(request):
 
-    pass
 
-    # return render(request,"test.html",{"h":h})
+
+    return render(request, "404/503.html", )
 
 
 # @cache_page(60*60)

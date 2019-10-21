@@ -5,7 +5,6 @@ from userinfo.models import *
 from django.db.models import F
 import os
 from bs4 import BeautifulSoup
-import html
 from bleach.sanitizer import ALLOWED_ATTRIBUTES, ALLOWED_TAGS
 from django.views.decorators.cache import cache_page
 import bleach
@@ -16,9 +15,16 @@ from utils import restful
 from django.core.cache import cache
 import json
 from qiniu import Auth, put_file, etag
+from LoveAndShare.settings import LOGGING
+import logging
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger('django.request')
+
+
 
 def article_detail(request, id):
     '''文章详情'''
+    logger.warning("jjjj{key}".format(key="jjjjjjj"))
     article = Article.objects.filter(id=id).first()
     Article.objects.filter(id=id).update(views=F("views") + 1)
     comment_list = Comment.objects.filter(article_id=id)
@@ -50,6 +56,7 @@ def article_archive(request):
     return render(request, "article/article_archive.html", {"article_list": article_list})
 
 def article_updown(request):
+
     '''文章点赞或不喜欢'''
     article_id = request.POST.get("article_id")
     article=Article.objects.filter(id=article_id)
