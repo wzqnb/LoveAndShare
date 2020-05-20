@@ -63,7 +63,7 @@ Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 future==0.17.1
 greenlet==0.4.13
-httplib2==0.13.0
+httplib2==0.18.0
 idna==2.8
 importlib-metadata==0.22
 ipaddress==1.0.22
