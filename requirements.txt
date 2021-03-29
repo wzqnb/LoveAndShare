@@ -97,7 +97,7 @@ pbr==5.4.2
 Pillow==6.1.0
 pycparser==2.19
 pygame==1.9.6
-Pygments==2.4.2
+Pygments==2.7.4
 PyJWT==1.7.1
 pylint==2.3.1
 PyMySQL==0.8.1
