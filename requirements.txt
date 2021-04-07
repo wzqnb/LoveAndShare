@@ -13,7 +13,7 @@ beautifulsoup4==4.8.0
 billiard==3.5.0.3
 bleach==3.1.0
 blinker==1.4
-bottle==0.12.17
+bottle==0.12.19
 bs4==0.0.1
 celery==4.2.0
 certifi==2019.6.16
