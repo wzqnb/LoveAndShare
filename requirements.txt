@@ -15,7 +15,7 @@ bleach==3.1.0
 blinker==1.4
 bottle==0.12.17
 bs4==0.0.1
-celery==4.2.0
+celery==5.2.2
 certifi==2019.6.16
 cffi==1.12.3
 chardet==3.0.4
